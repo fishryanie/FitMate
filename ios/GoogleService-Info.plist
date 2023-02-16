@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>CLIENT_ID</key>
+	<string>316573005808-0e9lpoedur1416p3nisljbqv2evlre82.apps.googleusercontent.com</string>
+	<key>REVERSED_CLIENT_ID</key>
+	<string>com.googleusercontent.apps.316573005808-0e9lpoedur1416p3nisljbqv2evlre82</string>
+	<key>API_KEY</key>
+	<string>AIzaSyDPl6lC1B7a3rpA5gkxTJZx9ixEGqyVm4I</string>
+	<key>GCM_SENDER_ID</key>
+	<string>316573005808</string>
+	<key>PLIST_VERSION</key>
+	<string>1</string>
+	<key>BUNDLE_ID</key>
+	<string>com.personal.iflex</string>
+	<key>PROJECT_ID</key>
+	<string>iflex-b0452</string>
+	<key>STORAGE_BUCKET</key>
+	<string>iflex-b0452.appspot.com</string>
+	<key>IS_ADS_ENABLED</key>
+	<false></false>
+	<key>IS_ANALYTICS_ENABLED</key>
+	<false></false>
+	<key>IS_APPINVITE_ENABLED</key>
+	<true></true>
+	<key>IS_GCM_ENABLED</key>
+	<true></true>
+	<key>IS_SIGNIN_ENABLED</key>
+	<true></true>
+	<key>GOOGLE_APP_ID</key>
+	<string>1:316573005808:ios:d00ad5b3b7c63166dc4f35</string>
+	<key>DATABASE_URL</key>
+	<string>https://iflex-b0452-default-rtdb.firebaseio.com</string>
+</dict>
+</plist>
