@@ -1,4 +1,4 @@
-# FitMate - Bạn đồng hành và là huấn luyện viên tập luyện cá nhân của bạn
+# FitMate - Get fit, stay motivated with FitMate - Your personal fitness companion
 
 - FitMate là một ứng dụng tập luyện và dinh dưỡng đa năng, mang đến cho người dùng trải nghiệm hoàn hảo để chăm sóc sức khỏe và thể chất. Với tính năng thiết lập mục tiêu, người dùng có thể dễ dàng tạo lịch tập luyện và lịch ăn uống phù hợp với mục tiêu của mình.
 
