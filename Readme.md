@@ -1,5 +1,7 @@
-# FitMate - Get fit, stay motivated with FitMate - Your personal fitness companion
+# <h1 id='top' align="center">Welcome to FitMate 👋</h1>
 
+## 📍 About project
+## Get fit, stay motivated with FitMate - Your personal fitness companion
 - FitMate là một ứng dụng tập luyện và dinh dưỡng đa năng, mang đến cho người dùng trải nghiệm hoàn hảo để chăm sóc sức khỏe và thể chất. Với tính năng thiết lập mục tiêu, người dùng có thể dễ dàng tạo lịch tập luyện và lịch ăn uống phù hợp với mục tiêu của mình.
 
 - Ứng dụng cũng cung cấp các giáo án luyện tập miễn phí được cập nhật liên tục bởi đội ngũ cộng tác viên, giúp người dùng tìm kiếm và tham khảo các chế độ tập luyện và dinh dưỡng phù hợp với mình.
