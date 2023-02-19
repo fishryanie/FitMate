@@ -7,7 +7,15 @@ import Feather from 'react-native-vector-icons/Feather';
 import AntDesign from 'react-native-vector-icons/AntDesign';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import { Block, Icon, Image, ListWrapper, Pressable, Text } from '@components';
+import {
+  Block,
+  Icon,
+  Image,
+  ListWrapper,
+  PopupAccept,
+  Pressable,
+  Text,
+} from '@components';
 import { Animated, StyleSheet } from 'react-native';
 import { bottom } from '@screens/bottom';
 import { hs, vs, width } from '@responsive';
@@ -16,6 +24,7 @@ import { COLORS, FONTS } from '@theme';
 import { useTranslation } from 'react-i18next';
 import { useDispatch, useSelector } from 'react-redux';
 import { LIST_PROFILE } from '@utils/fakeData';
+import { Toast } from 'react-native-toast-message/lib/src/Toast';
 
 const Bottom = createBottomTabNavigator();
 
@@ -23,9 +32,17 @@ export default function BottomContainer() {
   const { t } = useTranslation();
   const insets = useSafeAreaInsets();
   const dispatch = useDispatch();
-  const drawerOffset = useRef(new Animated.Value(0)).current;
   const isDrawer = useSelector(state => state.other.isDrawer);
+  const drawerOffset = useRef(new Animated.Value(0)).current;
   const [isFocusDrawer, setFocusDrawer] = useState(null);
+  const [isShowAcceptLogout, setShowAcceptLogout] = useState(false);
+
+  const handleLogOut = () => {
+    dispatch({ type: actions.LOGOUT_APP });
+    dispatch({ type: actions.TOGGLE_DRAWER });
+    dispatch({ type: _onUnmount(actions.GET_ONE_USER) });
+    Toast.show({ type: 'success', text1: 'Logout success' });
+  };
 
   const animatedStyles = {
     borderRadius: drawerOffset.interpolate({
@@ -171,12 +188,7 @@ export default function BottomContainer() {
       />
 
       <Block paddingHorizontal={15} paddingBottom={insets.bottom + 10}>
-        <Pressable
-          rowCenter
-          onPress={() => {
-            dispatch({ type: actions.LOGOUT_APP });
-            dispatch({ type: _onUnmount(actions.GET_ONE_USER) });
-          }}>
+        <Pressable rowCenter onPress={() => setShowAcceptLogout(true)}>
           <Icon IconType={Feather} iconName={'log-out'} iconSize={20} />
           <Text medium fontSize={18} margin={15}>
             Logout
@@ -214,6 +226,15 @@ export default function BottomContainer() {
           />
         </Bottom.Navigator>
       </Animated.View>
+
+      <PopupAccept
+        title="Accept Logout"
+        description="Are you sure you want to sign out?"
+        isShow={isShowAcceptLogout}
+        onShow={setShowAcceptLogout}
+        onAccept={handleLogOut}
+        onClose={() => setShowAcceptLogout(false)}
+      />
     </Block>
   );
 }

@@ -73,7 +73,7 @@ export const handleExpiredToken = error => {
             text: 'Đồng ý',
             onPress: () => {
               alertPending = false;
-              RNRestart.Restart();
+              // RNRestart.Restart();
               store.dispatch({ type: actions.LOGOUT_APP });
               store.dispatch({ type: _onUnmount(actions.GET_ONE_USER) });
             },
@@ -93,7 +93,7 @@ export const handleExpiredToken = error => {
             text: 'Đồng ý',
             onPress: () => {
               alertPending = false;
-              RNRestart.Restart();
+              // RNRestart.Restart();
               store.dispatch({ type: actions.LOGOUT_APP });
               store.dispatch({ type: _onUnmount(actions.GET_ONE_USER) });
             },
@@ -329,6 +329,3 @@ export const convertOption = (arr_option_tmp, option1, option2, option3) => {
   });
 };
 
-export const isEmpty = str => {
-  return !str || str.length === 0;
-};

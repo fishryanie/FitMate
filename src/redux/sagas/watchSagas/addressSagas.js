@@ -1,15 +1,153 @@
-import {put, takeLatest, select} from 'redux-saga/effects';
-import actions, {_onFail, _onSuccess} from '@redux/actions';
-import api from '@utils/api';
-import {URL_API} from '../common';
-import queryString from 'query-string';
+/** @format */
 
-function* getProvince(action) {
+import { put, takeLatest, select, call, delay } from '@redux-saga/core/effects';
+import actions, { _onFail, _onSuccess } from '@redux/actions';
+import api from '@utils/api';
+import { URL_API } from '../common';
+import queryString from 'query-string';
+import axios from 'axios';
+
+const GOONG_MAP_API_KEY = '6kfYR5HIKOBXsteSgGynecmSgtPBG3cISY7gUhHM';
+const instance = axios.create({
+  baseURL: 'https://rsapi.goong.io/',
+  timeout: 1000,
+});
+
+instance.interceptors.request.use(
+  config => {
+    config.params = {
+      api_key: GOONG_MAP_API_KEY,
+      ...config.params,
+    };
+    if (__DEV__) {
+      console.log(
+        `%c [REQUEST] ${config?.url}`,
+        'color: #458B00; font-weight: bold',
+        config,
+      );
+    }
+    return config;
+  },
+  error => {
+    throw error;
+  },
+);
+
+instance.interceptors.response.use(
+  response => {
+    if (__DEV__) {
+      console.log(
+        `%c [RESPONSE] ${response.config.url}`,
+        'color: #CD950C; font-weight: bold',
+        response,
+      );
+    }
+    return response;
+  },
+  error => {
+    if (__DEV__) {
+      console.log('ERROR: ', error.response);
+    }
+    throw error;
+  },
+);
+
+function* getAddressFromCoord(action) {
   try {
-    const res = yield api.get(URL_API.address.getLocation, action.params);
+    if (action.delay) {
+      yield delay(action.delay);
+    }
+    const res = yield call(instance.get, 'geocode', {
+      params: action.params,
+    });
+
+    const { status, error_message } = res.data;
+    if (status === 'OK' || status === 'ZERO_RESULTS') {
+      yield put({
+        type: _onSuccess(action.type),
+        data: res.data.results[0],
+      });
+      action.onSuccess?.(res.data.results[0]);
+    } else {
+      throw new Error(error_message);
+    }
+  } catch (error) {
+    yield put({ type: _onFail(action.type) });
+  }
+}
+
+function* getPlaceAutoComplete(payload) {
+  try {
+    yield delay(500);
+    const res = yield call(instance.get, '/place/autocomplete', {
+      params: payload.params,
+    });
+    const { status, error_message } = res.data;
+    const isLoading = yield select(state => state.placeAutoComplete.isLoading);
+    if ((status === 'OK' || status === 'ZERO_RESULTS') && isLoading) {
+      const data = res.data.predictions || [];
+      if (data.length) {
+        const userLocation = yield select(state => state.userLocation.data);
+        const allPromise = data.map(async d => {
+          const detail = await instance.get('place/detail', {
+            params: { place_id: d.place_id },
+          });
+          const direction = await instance.get('direction', {
+            params: {
+              alternatives: false,
+              vehicle: 'bike',
+              origin: `${userLocation.latitude},${userLocation.longitude}`,
+              destination: `${detail.data.result.geometry.location.lat},${detail.data.result.geometry.location.lng}`,
+            },
+          });
+          return { detail, direction };
+        });
+        const result = yield Promise.all(allPromise);
+        data.forEach((d, i) => {
+          const geometry = result[i].detail.data.result.geometry;
+          d.geometry = geometry;
+          d.distanceToUser =
+            (result[i].direction.data.routes[0].legs[0].distance.value || 0) / 1000;
+        });
+        data.sort((a, b) => a.distanceToUser - b.distanceToUser);
+      }
+      yield put({ type: _onSuccess(payload.type), data });
+    } else {
+      throw new Error(error_message);
+    }
+  } catch (error) {
+    yield put({ type: _onFail(payload.type) });
+  }
+}
+
+function* getDirections(payload) {
+  const directions = 'direction';
+  const params = {
+    alternatives: false,
+    vehicle: 'bike',
+    ...(payload.params || {}),
+  };
+  try {
+    const res = yield call(instance.get, directions, {
+      params,
+    });
+    if (res.status === 200) {
+      yield put({ type: _onSuccess(payload.type), data: res.data });
+      payload.onSuccess && payload.onSuccess(res.data);
+    } else {
+      throw new Error('invalid response');
+    }
+  } catch (error) {
+    yield put({ type: _onFail(payload.type) });
+  }
+}
+
+function* getCountry(action) {
+  try {
+    const res = yield api.get(URL_API.address.getLocation, { type: 'country' });
     yield put({
       type: _onSuccess(action.type),
-      data: res.data?.map((item, index) => ({
+      data: res.data?.map(item => ({
         value: item.code,
         label: item.title,
       })),
@@ -17,7 +155,23 @@ function* getProvince(action) {
     action.onSuccess?.(res.data);
   } catch (error) {
     action.onFail?.();
-    yield put({type: _onFail(action.type)});
+    yield put({ type: _onFail(action.type) });
+  }
+}
+function* getProvince(action) {
+  try {
+    const res = yield api.get(URL_API.address.getLocation, { type: 'province' });
+    yield put({
+      type: _onSuccess(action.type),
+      data: res.data?.map(item => ({
+        value: item.code,
+        label: item.title,
+      })),
+    });
+    action.onSuccess?.(res.data);
+  } catch (error) {
+    action.onFail?.();
+    yield put({ type: _onFail(action.type) });
   }
 }
 
@@ -34,7 +188,7 @@ function* getDistrict(action) {
     action.onSuccess?.(res.data);
   } catch (error) {
     action.onFail?.();
-    yield put({type: _onFail(action.type)});
+    yield put({ type: _onFail(action.type) });
   }
 }
 
@@ -51,7 +205,7 @@ function* getWard(action) {
     action.onSuccess?.(res.data);
   } catch (error) {
     action.onFail?.();
-    yield put({type: _onFail(action.type)});
+    yield put({ type: _onFail(action.type) });
   }
 }
 
@@ -68,7 +222,7 @@ function* getSaveLocation(action) {
     action.onSuccess?.(res?.data);
   } catch (error) {
     action.onFail?.();
-    yield put({type: _onFail(action.type)});
+    yield put({ type: _onFail(action.type) });
   }
 }
 
@@ -87,7 +241,7 @@ function* getSaveLocationDefault(action) {
     action.onSuccess?.(res?.data);
   } catch (error) {
     action.onFail?.();
-    yield put({type: _onFail(action.type)});
+    yield put({ type: _onFail(action.type) });
   }
 }
 
@@ -105,7 +259,7 @@ function* updateSaveLocation(action) {
     action.onSuccess?.(res.data);
   } catch (error) {
     action.onFail?.();
-    yield put({type: _onFail(action.type)});
+    yield put({ type: _onFail(action.type) });
   }
 }
 
@@ -123,7 +277,7 @@ function* deleteSaveLocation(action) {
     action.onSuccess?.(res.data);
   } catch (error) {
     action.onFail?.();
-    yield put({type: _onFail(action.type)});
+    yield put({ type: _onFail(action.type) });
   }
 }
 
@@ -140,8 +294,8 @@ function* addSaveLocation(action) {
     });
     action.onSuccess?.(res.data);
   } catch (error) {
-    action.onFail?.();
-    yield put({type: _onFail(action.type)});
+    action.onFail?.(error);
+    yield put({ type: _onFail(action.type) });
   }
 }
 
@@ -161,18 +315,23 @@ function* getSaveLocationType(action) {
     action.onSuccess?.(res?.data);
   } catch (error) {
     action.onFail?.();
-    yield put({type: _onFail(action.type)});
+    yield put({ type: _onFail(action.type) });
   }
 }
 
 export function* watchAddressSagas() {
+  //gg map goong.io
+  // yield takeLatest(actions.GG_PLACE_AUTOCOMPLETE, getPlaceAutoComplete);
+  // yield takeLatest(actions.GG_GEOCODING, getAddressFromCoord);
+  // yield takeLatest(actions.GET_DIRECTIONS, getDirections);
+  // //server
+  // yield takeLatest(actions.GET_COUNTRY, getCountry);
   // yield takeLatest(actions.GET_PROVINCE_LOCATION, getProvince);
   // yield takeLatest(actions.GET_DISTRICT_LOCATION, getDistrict);
   // yield takeLatest(actions.GET_WARD_LOCATION, getWard);
   // yield takeLatest(actions.GET_SAVE_LOCATION, getSaveLocation);
-  // yield takeLatest(actions.GET_SAVE_LOCATION_DEFAULT, getSaveLocationDefault);
   // yield takeLatest(actions.UPDATE_SAVE_LOCATION, updateSaveLocation);
   // yield takeLatest(actions.DELETE_SAVE_LOCATION, deleteSaveLocation);
   // yield takeLatest(actions.ADD_SAVE_LOCATION, addSaveLocation);
-  // yield takeLatest(actions.GET_SAVE_LOCATION_TYPE, getSaveLocationType);
+  // yield takeLatest(actions.ADD_SAVE_LOCATION, getSaveLocationType);
 }

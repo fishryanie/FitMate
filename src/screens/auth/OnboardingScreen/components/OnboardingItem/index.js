@@ -1,15 +1,17 @@
-import {Block, Text} from '@components';
-import {COLORS, FONTS} from '@theme';
-import {hs, vs, mhs, width, height} from '@utils/responsive';
-import React from 'react';
-import {ImageBackground, StyleSheet} from 'react-native';
+/** @format */
 
-const OnBoardingItem = ({item}) => {
+import { Block, Text } from '@components';
+import { COLORS, FONTS } from '@theme';
+import { hs, vs, mhs, width, height } from '@utils/responsive';
+import React from 'react';
+import { ImageBackground, StyleSheet } from 'react-native';
+
+const OnBoardingItem = ({ item }) => {
   return (
     <Block style={styles.container}>
       <ImageBackground
         resizeMode="contain"
-        style={[styles.image, {width: width}]}
+        style={[styles.image, { width: width }]}
         source={item.image}
       />
       <Text bold style={styles.title}>

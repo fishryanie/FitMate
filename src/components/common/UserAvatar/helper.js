@@ -1,3 +1,5 @@
+/** @format */
+
 import initials from 'initials';
 
 export const getAbbr = name => {

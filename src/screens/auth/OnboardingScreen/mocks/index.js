@@ -1,4 +1,6 @@
-import {IMAGES} from '@assets';
+/** @format */
+
+import { IMAGES } from '@assets';
 
 export const dataImage = [
   {
@@ -10,8 +12,7 @@ export const dataImage = [
   {
     image: IMAGES.onboarding_2,
     title: 'HÀNG HÓA TRAO TẬN TAY',
-    content:
-      'An toàn, nhanh chóng, đảm bảo hàng hóa không hư hỏng khi giao đến tay bạn',
+    content: 'An toàn, nhanh chóng, đảm bảo hàng hóa không hư hỏng khi giao đến tay bạn',
   },
   {
     image: IMAGES.onboarding_3,

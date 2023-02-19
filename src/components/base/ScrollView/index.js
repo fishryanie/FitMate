@@ -19,8 +19,13 @@ const ScrollView = ({
       horizontal={horizontal}
       showsHorizontalScrollIndicator={false}
       showsVerticalScrollIndicator={false}
-      refreshControl={onRefresh && <RefreshControl onRefresh={onRefresh} refreshing={refreshing} />}
-      contentContainerStyle={[contentContainerStyle, safeAreaBottom && { paddingBottom: bottom ? bottom : 10 }]}
+      refreshControl={
+        onRefresh && <RefreshControl onRefresh={onRefresh} refreshing={refreshing} />
+      }
+      contentContainerStyle={[
+        contentContainerStyle,
+        safeAreaBottom && { paddingBottom: bottom ? bottom : 10 },
+      ]}
     />
   );
 };

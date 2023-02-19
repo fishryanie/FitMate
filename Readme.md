@@ -32,7 +32,7 @@
 Sau đó, bạn có thể tải về mã nguồn từ trang GitHub của dự án hoặc clone mã nguồn bằng lệnh:
 
 ```javascript
-git clone https://github.com/your-username/fitmate.git
+git clone https://github.com/fishryanie/FitMate.git
 ```
 
 Tiếp theo để chạy ứng dụng, bạn cần mở Terminal và truy cập vào thư mục chứa mã nguồn của ứng dụng, sau đó chạy lệnh sau:

@@ -1,5 +1,7 @@
-import {height} from '@responsive';
-import React, {useEffect, useRef, useState} from 'react';
+/** @format */
+
+import { height } from '@responsive';
+import React, { useEffect, useRef, useState } from 'react';
 import {
   Modal as ReactNativeModal,
   TouchableWithoutFeedback,
@@ -36,7 +38,7 @@ const ModalBox = ({
         toValue: 0,
         duration: animationDuration,
         useNativeDriver: false,
-      }).start(({finished}) => {
+      }).start(({ finished }) => {
         if (finished) {
           setModalShow(false);
         }
@@ -87,13 +89,9 @@ const ModalBox = ({
       animationType={animationType}
       visible={modalShow}>
       <TouchableWithoutFeedback onPress={_onCloseModal}>
-        <Animated.View
-          style={[styles.backdrop, rOverLayStyle, backdropStyle]}
-        />
+        <Animated.View style={[styles.backdrop, rOverLayStyle, backdropStyle]} />
       </TouchableWithoutFeedback>
-      <Animated.View
-        style={[rContentStyle, containerStyle]}
-        pointerEvents="box-none">
+      <Animated.View style={[rContentStyle, containerStyle]} pointerEvents="box-none">
         {children}
       </Animated.View>
     </ReactNativeModal>

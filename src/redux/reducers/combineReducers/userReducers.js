@@ -111,9 +111,9 @@ export const getOneUser = (...props) => {
 //   return reducerDefault(...props, actions.UPDATE_AVATAR);
 // };
 
-// export const updateUser = (...props) => {
-//   return reducerDefault(...props, actions.UPDATE_USER);
-// };
+export const updateOneUser = (...props) => {
+  return reducerDefault(...props, actions.UPDATE_ONE_USER);
+};
 
 // export const updatePass = (...props) => {
 //   return reducerDefault(...props, actions.UPDATE_PASS);

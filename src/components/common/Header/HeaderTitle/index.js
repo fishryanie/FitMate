@@ -37,7 +37,7 @@ export default function HeaderTitle({
     return (
       (canGoBack || onGoBack) && (
         <TouchableOpacity opacity={opacity} onPress={_onGoBack}>
-          <Icon IconType={AntDesign} iconName="arrowleft" iconSize={25} />
+          <Icon IconType={AntDesign} iconName="arrowleft" iconSize={25} color={color} />
         </TouchableOpacity>
       )
     );

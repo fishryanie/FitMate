@@ -1,21 +1,16 @@
-import {Block, Controller, RadioButton, Text} from '@components';
-import {SIZES} from '@theme';
+/** @format */
+
+import { Block, Controller, RadioButton, Text } from '@components';
+import { SIZES } from '@theme';
 import React from 'react';
 
-const CustomRadio = ({
-  data,
-  containerProps,
-  value,
-  onChange,
-  itemProps,
-  label,
-}) => {
+const CustomRadio = ({ data, containerProps, value, onChange, itemProps, label }) => {
   const _onChangeValue = item => {
     onChange(item?.value);
   };
 
   return (
-    <Block margin={SIZES.medium} {...containerProps}>
+    <Block {...containerProps}>
       {label?.length > 0 && <Text fontSize={17}>{label}</Text>}
       <RadioButton
         data={data}
@@ -37,8 +32,8 @@ const FormRadioButton = ({
   label = '',
 }) => {
   return (
-    <Controller {...{control, name}}>
-      <CustomRadio data={data} {...{containerProps, itemProps, label}} />
+    <Controller {...{ control, name }}>
+      <CustomRadio data={data} {...{ containerProps, itemProps, label }} />
     </Controller>
   );
 };

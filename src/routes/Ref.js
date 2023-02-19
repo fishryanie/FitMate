@@ -1,4 +1,6 @@
-import {createNavigationContainerRef} from '@react-navigation/native';
+/** @format */
+
+import { createNavigationContainerRef } from '@react-navigation/native';
 import router from './router';
 
 export const navigationRef = createNavigationContainerRef();
@@ -35,9 +37,15 @@ export const commonRoot = {
   },
 };
 
+export const drawerRoot = {
+  navigate: (screenName, screenParams) => {
+    rootNavigate(router.DRAWER_CONTAINER, screenName, screenParams);
+  },
+};
+
 export function reset(index, name) {
   navigationRef.current?.reset({
     index,
-    routes: [{name}],
+    routes: [{ name }],
   });
 }

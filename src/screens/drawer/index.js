@@ -4,6 +4,7 @@ import router from '@routes/router';
 import SettingScreen from './SettingScreen';
 import ProductManagementScreen from './ProductManagementScreen';
 import ShopFormProductScreen from './ProductManagementScreen/ShopFormProductScreen';
+import AccountInfoScreen from './AccountInfoScreen';
 
 export const drawer = {
   [router.SETTING_SCREEN]: SettingScreen,
@@ -13,7 +14,7 @@ export const drawer = {
   [router.REFER_FRIEND_SCREEN]: ProductManagementScreen,
   [router.SAVE_LOCATION_SCREEN]: ProductManagementScreen,
   [router.ORDER_HISTORY_SCREEN]: ProductManagementScreen,
-  [router.ACCOUNT_INTRO_SCREEN]: ProductManagementScreen,
+  [router.ACCOUNT_INTRO_SCREEN]: AccountInfoScreen,
   [router.CHANGE_PASSWORD_SCREEN]: ProductManagementScreen,
   [router.REVENUE_STATISTICS_SCREEN]: ProductManagementScreen,
   [router.PRODUCT_MANAGEMENT_SCREEN]: ProductManagementScreen,

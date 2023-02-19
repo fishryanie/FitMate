@@ -1,7 +1,9 @@
-import {TextInput} from '@components';
-import React, {useEffect, useMemo, useState} from 'react';
+/** @format */
 
-const NumberInput = ({value, onChangeValue, maxValue, ...props}) => {
+import { TextInput } from '@components';
+import React, { useEffect, useMemo, useState } from 'react';
+
+const NumberInput = ({ value, onChangeValue, maxValue, ...props }) => {
   const formatter = useMemo(() => new Intl.NumberFormat('en-US'), []);
   const [_value, setValue] = useState(value ? formatter.format(value) : '');
 

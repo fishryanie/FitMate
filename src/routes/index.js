@@ -18,6 +18,13 @@ const Stack = createNativeStackNavigator();
 export default function MainContainer() {
   const accessToken = useSelector(state => state.user.accessToken);
 
+  const dispatch = useDispatch();
+  useEffect(() => {
+    if (accessToken) {
+      dispatch({ type: actions.GET_ONE_USER });
+      dispatch({ type: actions.GET_CONFIGS_APP, params: { type: 'terms-policy' } });
+    }
+  }, [dispatch, accessToken]);
   return (
     <NavigationContainer ref={navigationRef}>
       <Stack.Navigator screenOptions={{ headerShown: false }}>

@@ -29,13 +29,14 @@ TextInput.defaultProps.allowFontScaling = false;
 const App = () => {
   useNotificationPermission();
   useNotificationMessage();
+
+  const accessToken = useSelector(state => state.user.accessToken);
   const getConfigsApp = useSelector(state => state.getConfigsApp);
-  console.log('🚀 ~ file: App.js:35 ~ App ~ getConfigsApp', getConfigsApp);
   const dispatch = useDispatch();
   useEffect(() => {
     SplashScreen.hide();
-    dispatch({ type: actions.GET_CONFIGS_APP, params: { type: 'terms-policy' } });
   }, [dispatch]);
+
   return <MainContainer />;
 };
 

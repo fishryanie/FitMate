@@ -10,7 +10,7 @@ export const URL_API = {
     logoutUser: 'logoutUser',
     getUser: 'auth/get-one-user',
     updateAvatar: 'updateUser',
-    updateUser: 'updateUser',
+    updateUser: 'auth/update-one-user',
     updatePassword: 'updatePassword',
   },
 

@@ -1,8 +1,9 @@
-import {Block} from '@components';
-import {COLORS} from '@theme';
+/** @format */
+
 import React from 'react';
-import {ActivityIndicator} from 'react-native';
-import {BallIndicator} from 'react-native-indicators';
+import { Block } from '@components';
+import { COLORS } from '@theme';
+import { ActivityIndicator } from 'react-native';
 
 const Loading = ({
   width = 250,
@@ -18,15 +19,8 @@ const Loading = ({
       alignCenter
       backgroundColor={backgroundColor}
       {...containerProps}>
-      <Block
-        shadow3
-        alignCenter
-        justifyCenter
-        height={70}
-        width={70}
-        radius={5}
-        backgroundColor="white">
-        <BallIndicator size={30} color={COLORS.red} />
+      <Block shadow3 alignCenter justifyCenter height={70} width={70} radius={5}>
+        <ActivityIndicator size={30} color={COLORS.light} />
       </Block>
     </Block>
   );

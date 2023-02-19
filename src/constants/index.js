@@ -110,3 +110,8 @@ export const TYPE_SUBMIT_AUTH = {
   google: '@GOOGLE',
   facebook: '@FACEBOOK',
 };
+
+export const DATA_GENDER = [
+  { label: 'Nam', value: false },
+  { label: 'Nữ', value: true },
+];

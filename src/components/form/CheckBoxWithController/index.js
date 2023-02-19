@@ -1,14 +1,16 @@
-import {Icon, Pressable, Text} from '@components';
+/** @format */
+
+import { Icon, Pressable, Text } from '@components';
 import Block from '@components/base/Block';
 import React from 'react';
-import {useController} from 'react-hook-form';
+import { useController } from 'react-hook-form';
 import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
 
-const CheckBoxWithController = ({name, control, label = ''}) => {
+const CheckBoxWithController = ({ name, control, label = '' }) => {
   const {
-    field: {onChange, value},
-    fieldState: {error},
-  } = useController({name, control});
+    field: { onChange, value },
+    fieldState: { error },
+  } = useController({ name, control });
 
   return (
     <Block>

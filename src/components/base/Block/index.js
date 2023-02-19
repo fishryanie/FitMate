@@ -5,7 +5,13 @@ import { COLORS } from '@theme';
 import React from 'react';
 import { StyleSheet, View } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
-import { handleFlex, handleFlexGrow, handleFlexShrink, handleRound, handleSquare } from '../../shared';
+import {
+  handleFlex,
+  handleFlexGrow,
+  handleFlexShrink,
+  handleRound,
+  handleSquare,
+} from '../../shared';
 import styles from './styles';
 
 const Block = ({

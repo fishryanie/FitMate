@@ -2,7 +2,13 @@
 
 import React from 'react';
 import { StyleSheet, Text as RNText } from 'react-native';
-import { handleFlex, handleFlexGrow, handleFlexShrink, handleRound, handleSquare } from '@components/shared';
+import {
+  handleFlex,
+  handleFlexGrow,
+  handleFlexShrink,
+  handleRound,
+  handleSquare,
+} from '@components/shared';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { hs, vs } from '@responsive';
 import { COLORS, FONTS } from '@theme';
@@ -111,6 +117,14 @@ const Text = ({
   numberOfLines,
   style,
   children,
+  //position
+  relative,
+  absolute,
+  absoluteFillObject,
+  positionTop,
+  positionRight,
+  positionBottom,
+  positionLeft,
   ...rest
 }) => {
   const insets = useSafeAreaInsets();
@@ -214,6 +228,14 @@ const Text = ({
     includeFontPadding !== underline && { includeFontPadding },
     letterSpacing !== underline && { letterSpacing: letterSpacing },
     lineHeight && { lineHeight: hs(lineHeight) },
+    //position
+    relative && { position: 'relative' },
+    absolute && { position: 'absolute' },
+    absoluteFillObject && styles.absoluteFillObject,
+    positionTop !== undefined && { top: hs(positionTop) },
+    positionRight !== undefined && { right: hs(positionRight) },
+    positionBottom !== undefined && { bottom: hs(positionBottom) },
+    positionLeft !== undefined && { left: hs(positionLeft) },
     { ...StyleSheet.flatten(style) },
   ];
 

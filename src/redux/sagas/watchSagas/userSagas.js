@@ -51,23 +51,6 @@ function* signUpUser(action) {
   }
 }
 
-function* logoutUser(action) {
-  const userToken = yield select(state => state.user.userToken);
-  try {
-    const res = yield api.get(URL_API.user.logoutUser, {
-      user: userToken,
-    });
-    yield put({
-      type: _onSuccess(action.type),
-      data: res.data,
-    });
-    yield put({ type: actions.UNMOUNT_USER });
-    action.onSuccess?.(res);
-  } catch (error) {
-    action.onFail?.(error.data.message);
-    yield put({ type: _onFail(actions.type) });
-  }
-}
 function* checkPhone(action) {
   try {
     const res = yield api.get(URL_API.user.checkPhone, action.params);
@@ -83,11 +66,8 @@ function* checkPhone(action) {
 }
 
 function* getOneUser(action) {
-  const userToken = yield select(state => state.user.userToken);
   try {
-    const res = yield api.get(URL_API.user.getUser, {
-      user: userToken,
-    });
+    const res = yield api.get(URL_API.user.getUser);
     yield put({
       type: _onSuccess(action.type),
       data: res.data,
@@ -118,21 +98,28 @@ function* updateAvatar(action) {
   }
 }
 
-function* updateUser(action) {
-  const body = yield handleFormData(action.body);
-  const userToken = yield select(state => state.user.userToken);
+function* updateOneUser(action) {
+  // const body = yield handleFormData(action.body);
   try {
-    const res = yield api.postFormData(URL_API.user.updateUser, body, {
-      user: userToken,
-    });
+    const res = yield api.put(URL_API.user.updateUser, action.body);
+    yield put({ type: actions.GET_ONE_USER });
     yield put({
       type: _onSuccess(action.type),
       data: res.data,
     });
     action.onSuccess?.(res.data);
+    Toast.show({
+      type: 'success',
+      text1: res?.message,
+    });
   } catch (error) {
-    action.onFail?.(error.data);
     yield put({ type: _onFail(action.type) });
+    action.onFail?.(error.data);
+    Toast.show({
+      type: 'error',
+      text1: 'Access Denied!',
+      text2: error?.data?.message,
+    });
   }
 }
 
@@ -171,10 +158,9 @@ function* updatePass(action) {
 
 export function* watchUserSagas() {
   yield takeLatest(actions.LOGIN_APP, login);
-  // yield takeLatest(actions.LOGOUT_USER, logoutUser);
   yield takeLatest(actions.GET_ONE_USER, getOneUser);
   // yield takeLatest(actions.UPDATE_AVATAR, updateAvatar);
-  // yield takeLatest(actions.UPDATE_USER, updateUser);
+  yield takeLatest(actions.UPDATE_ONE_USER, updateOneUser);
   // yield takeLatest(actions.UPDATE_PASS, updatePass);
   // yield takeLatest(actions.CHECK_PHONE, checkPhone);
   // yield takeLatest(actions.SEND_OTP, sendOTP);

@@ -1,58 +1,112 @@
 /** @format */
 
-// dùng react native function component viết cho tôi 1 màn hình có hiệu ứng nhiều trái banh tự động di chuyển tự do khắp nơi trên màn hình, những trái banh có nhiều màu sắc khác nhau
+import { Block, Button, HeaderTitle, Icon, ListWrapper, Modal, Text } from '@components';
+import Box from '@components/common/Box';
+import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs';
+import { COLORS } from '@theme';
+import { height, width } from '@responsive';
+import React, { useRef, useState } from 'react';
+import AntDesign from 'react-native-vector-icons/AntDesign';
+import { Animated, ScrollView } from 'react-native';
 
-import React, { useState, useEffect } from 'react';
-import { StyleSheet, View, Animated } from 'react-native';
-
-const colors = ['#FF0000', '#00FF00', '#0000FF', '#FFFF00'];
-
-const DonutScreen = () => {
-  const [donuts, setDonuts] = useState([]);
-
-  useEffect(() => {
-    // Generate random donuts with random colors and positions on the screen.
-    let donutArray = [];
-
-    for (let i = 0; i < 10; i++) {
-      let colorIndex = Math.floor(Math.random() * colors.length);
-
-      let xPos = Math.floor(Math.random() * 100);
-      let yPos = Math.floor(Math.random() * 100);
-
-      donutArray.push({ x: xPos, y: yPos, color: colors[colorIndex] });
-    }
-
-    setDonuts(donutArray);
-  }, []);
-
-  // Animate the donuts on the screen by randomly changing their position over time.
-  useEffect(() => {
-    const animationInterval = setInterval(() => {
-      let updatedDonuts = [...donuts];
-
-      for (let i = 0; i < updatedDonuts.length; i++) {
-        let xPos = Math.floor(Math.random() * 100);
-        let yPos = Math.floor(Math.random() * 100);
-
-        updatedDonuts[i].x = xPos;
-        updatedDonuts[i].y = yPos;
-      }
-
-      setDonuts([...updatedDonuts]);
-    }, 1000); // Update every second (1000ms).
-
-    return () => clearInterval(animationInterval); // Clean up interval when component unmounts to avoid memory leaks/performance issues.
-  }, [donuts]); // Only run this effect when the donut array changes (when it is initially generated).
-
-  return (
-    <View style={styles.container}>
-      {donuts &&
-        donuts.map((donut, index) => (
-          <Animated key={index} style={{ left: donut.x + '%', top: donut.y + '%', backgroundColor: donut.color }} />
-        ))}
-    </View>
-  );
+const screenOptionTab = {
+  tabBarActiveTintColor: COLORS.primary,
+  tabBarInactiveTintColor: COLORS.placeholder,
+  tabBarIndicatorStyle: {
+    backgroundColor: COLORS.primary,
+  },
+  tabBarStyle: {
+    elevation: 3,
+    shadowOpacity: 0.22,
+    shadowRadius: 2.22,
+    shadowColor: COLORS.black,
+    shadowOffset: {
+      width: 0,
+      height: 1,
+    },
+  },
 };
-const styles = StyleSheet.create({ container: { flex: 1, justifyContent: 'center', alignItems: 'center' } });
-export default DonutScreen;
+
+const Tab = createMaterialTopTabNavigator();
+
+export default function PlanScreen() {
+  return (
+    <Block flex>
+      <HeaderTitle canGoBack canSearch title="Plan" />
+      <Tab.Navigator screenOptions={screenOptionTab}>
+        <Tab.Screen name="Workout" component={Workout} />
+        <Tab.Screen name="Meal" component={Meal} />
+      </Tab.Navigator>
+    </Block>
+  );
+}
+
+function Workout() {
+  const [isOpen, setOpen] = useState(false);
+  const [currentIndex, setCurrentIndex] = useState(0);
+
+  const slidesRef = useRef(null);
+  const scrollX = useRef(new Animated.Value(0)).current;
+  const viewConfig = useRef({ viewAreaCoveragePercentThreshold: 50 }).current;
+  const viewableItemsChanged = useRef(({ viewableItems }) => {
+    setCurrentIndex(viewableItems[0]?.index);
+  }).current;
+  const handleScrollToIndex = index => {
+    slidesRef.current.scrollTo({ x: (width - 60) * index, animated: true });
+  };
+  return (
+    <Block flex safePaddingAreaBottom padding={15} backgroundColor={COLORS.light}>
+      <Box rowCenter padding={15} onPress={() => setOpen(true)}>
+        <Icon IconType={AntDesign} iconName={'pluscircleo'} iconSize={16} />
+        <Text flex medium fontSize={16} marginHorizontal={10}>
+          Thêm lịch tập
+        </Text>
+      </Box>
+
+      <Modal position="center" isVisible={isOpen} onBackdropPress={() => setOpen(false)}>
+        <Block
+          radius={15}
+          margin={15}
+          padding={15}
+          width={width - 30}
+          height={height / 1.5}
+          backgroundColor={COLORS.light}>
+          <ScrollView
+            horizontal
+            pagingEnabled
+            bounces={false}
+            ref={slidesRef}
+            scrollEnabled={false}
+            scrollEventThrottle={32}
+            viewabilityConfig={viewConfig}
+            onViewableItemsChanged={viewableItemsChanged}
+            showsHorizontalScrollIndicator={false}
+            onScroll={Animated.event(
+              [{ nativeEvent: { contentOffset: { x: scrollX } } }],
+              {
+                useNativeDriver: false,
+              },
+            )}>
+            <Block justifyEnd width={width - 60} backgroundColor={COLORS.amber100}>
+              <Button
+                margin={20}
+                title="Continue1"
+                onPress={() => handleScrollToIndex(1)}
+              />
+            </Block>
+            <Block width={width - 60} backgroundColor={COLORS.blue100}>
+              <Button title="Continue2" margin={20}  onPress={() => handleScrollToIndex(2)}/>
+            </Block>
+            <Block width={width - 60} backgroundColor={COLORS.brown100}>
+              <Button title="Continue3" margin={20} />
+            </Block>
+          </ScrollView>
+        </Block>
+      </Modal>
+    </Block>
+  );
+}
+
+function Meal() {
+  return <Block flex></Block>;
+}

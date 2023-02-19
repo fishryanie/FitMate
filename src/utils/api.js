@@ -91,7 +91,7 @@ export default class HttpService {
     if (token !== null) {
       options = {
         ...options,
-        Authorization: `Bearer ${token}`,
+        authorization: `Bearer ${token}`,
       };
     }
 
@@ -154,7 +154,9 @@ export default class HttpService {
     try {
       return await axios
         .put(url, data, {
-          headers: this.generateHeader(),
+          headers: {
+            put: this.generateHeader(),
+          },
         })
         .then(response => response.data);
     } catch (error) {
