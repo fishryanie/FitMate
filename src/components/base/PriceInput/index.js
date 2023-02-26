@@ -3,13 +3,13 @@
 import { TextInput } from '@components';
 import React, { useEffect, useMemo, useState } from 'react';
 
-const NumberInput = ({ value, onChangeValue, maxValue, ...props }) => {
+const PriceInput = ({ value, onChangeValue, maxValue, ...props }) => {
   const formatter = useMemo(() => new Intl.NumberFormat('en-US'), []);
   const [_value, setValue] = useState(value ? formatter.format(value) : '');
 
   useEffect(() => {
     setValue(value ? formatter.format(value) : '');
-  }, [value]);
+  }, [setValue, formatter, value]);
 
   const onChangeText = text => {
     if (maxValue) {
@@ -36,4 +36,4 @@ const NumberInput = ({ value, onChangeValue, maxValue, ...props }) => {
   );
 };
 
-export default NumberInput;
+export default PriceInput;

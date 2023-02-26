@@ -3,15 +3,15 @@
 import { combineReducers } from 'redux';
 
 import * as userReducers from './combineReducers/userReducers';
-import * as otherReducers from './combineReducers/otherReducers';
-import * as addressReducers from './combineReducers/addressReducers';
+import * as otherReducers from './combineReducers/appReducers';
+import * as locationReducers from './combineReducers/locationReducers';
 import * as generalReducers from './combineReducers/generalReducers';
 
 const rootReducer = combineReducers({
   ...userReducers,
   ...otherReducers,
   ...generalReducers,
-  ...addressReducers,
+  ...locationReducers,
 });
 
 export default rootReducer;

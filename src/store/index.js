@@ -5,14 +5,14 @@ import { applyMiddleware, legacy_createStore as createStore, compose } from 'red
 import { persistReducer, persistStore } from 'redux-persist';
 import autoMergeLevel2 from 'redux-persist/lib/stateReconciler/autoMergeLevel2';
 import createSagaMiddleware from 'redux-saga';
-import rootReducer from '../reducers';
-import rootSaga from '../sagas';
+import rootReducer from './reducers';
+import rootSaga from './sagas';
 
 const persistConfig = {
   key: 'root',
   storage: AsyncStorage,
   stateReconciler: autoMergeLevel2,
-  whitelist: ['user', 'other'],
+  whitelist: ['app', 'user'],
 };
 
 const pReducer = persistReducer(persistConfig, rootReducer);
@@ -32,6 +32,6 @@ const store = createStore(pReducer, composeEnhancers(applyMiddleware(...middlewa
 
 sagaMiddleware.run(rootSaga);
 
-export const persistor = persistStore(store);
+const persistor = persistStore(store);
 
-export default store;
+export { store, persistor };

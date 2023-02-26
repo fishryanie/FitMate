@@ -120,6 +120,7 @@ const FormInput = ({
         paddingLeft={15}
         paddingRight={5}
         borderWidth={outline ? 1 : 0}
+        borderBottomWidth={outline ? 0 : 1}
         backgroundColor={disabled ? COLORS.grey300 : COLORS.transparent}
         borderColor={
           isFocused && errorMessage
@@ -134,7 +135,7 @@ const FormInput = ({
           <Animated.View
             style={[
               {
-                marginLeft: 10,
+                marginLeft: renderIconLeft ? 35 : 10,
                 borderRadius: 5,
                 position: 'absolute',
                 paddingHorizontal: 5,

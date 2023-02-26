@@ -4,7 +4,7 @@ import { Block, ButtonSubmit } from '@components';
 import { USER_ROLE } from '@constants';
 import router from '@routes/router';
 import { useNavigation } from '@react-navigation/native';
-import actions from '@redux/actions';
+import actions from 'store/actions';
 import { COLORS } from '@theme';
 import { vs } from '@utils/responsive';
 import Storage from '@utils/storage';

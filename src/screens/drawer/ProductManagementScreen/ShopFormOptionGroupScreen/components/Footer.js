@@ -1,7 +1,7 @@
 /** @format */
 
 import React, { Fragment, useEffect, useState } from 'react';
-import actions from '@redux/actions';
+import actions from 'store/actions';
 import { Block, Button, CustomDialog, Modal, Text } from '@components';
 import { COLORS } from '@theme';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';

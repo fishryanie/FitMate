@@ -1,30 +1,51 @@
 /** @format */
 
 import React, { Fragment, useEffect } from 'react';
+import i18n from 'i18n';
 import router from './router';
-import actions from '@redux/actions';
-import SplashScreen from 'react-native-splash-screen';
-import { NavigationContainer } from '@react-navigation/native';
-import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import { useSelector, useDispatch } from 'react-redux';
-import { navigationRef } from './Ref';
+import actions from 'store/actions';
 import AuthContainer from './AuthContainer';
 import BottomContainer from './BottomContainer';
 import CommonContainer from './CommonContainer';
 import DrawerContainer from './DrawerContainer';
+import { NavigationContainer } from '@react-navigation/native';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import { useSelector, useDispatch } from 'react-redux';
+import { navigationRef } from './Ref';
+import {
+  useFCMMessage,
+  useFCMToken,
+  useNotificationMessage,
+  useNotificationPermission,
+} from '@hooks';
+import { PopupAccept } from '@components';
 
 const Stack = createNativeStackNavigator();
 
 export default function MainContainer() {
+  useFCMToken();
+  useNotificationMessage();
+  useNotificationPermission();
+  const dispatch = useDispatch();
+  const message = useFCMMessage();
+
+  const appLanguage = useSelector(state => state.app.lang);
   const accessToken = useSelector(state => state.user.accessToken);
 
-  const dispatch = useDispatch();
+  useEffect(() => {
+    i18n.changeLanguage(appLanguage);
+  }, [appLanguage]);
+
+  useEffect(() => {
+    dispatch({ type: actions.GET_CONFIGS_APP, params: { type: 'terms-policy' } });
+  }, [dispatch]);
+
   useEffect(() => {
     if (accessToken) {
       dispatch({ type: actions.GET_ONE_USER });
-      dispatch({ type: actions.GET_CONFIGS_APP, params: { type: 'terms-policy' } });
     }
   }, [dispatch, accessToken]);
+
   return (
     <NavigationContainer ref={navigationRef}>
       <Stack.Navigator screenOptions={{ headerShown: false }}>

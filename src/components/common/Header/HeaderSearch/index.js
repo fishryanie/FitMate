@@ -13,7 +13,7 @@ import { getSize } from '@utils/responsive';
 import { COLORS } from '@theme';
 import router from '@routes/router';
 import { useDispatch, useSelector } from 'react-redux';
-import actions, { _onUnmount } from '@redux/actions';
+import actions, { _onUnmount } from 'store/actions';
 import AntDesign from 'react-native-vector-icons/AntDesign';
 import { t } from 'i18next';
 
@@ -49,8 +49,7 @@ const HeaderSearch = ({
         onPress={() => {
           commonRoot.navigate(router.FILTER_SCREEN);
         }}
-        paddingHorizontal={SIZES.xSmall}
-      >
+        paddingHorizontal={SIZES.xSmall}>
         <Image source={ICONS.ic_filter} width={34} height={28} />
         {listItemCart?.food?.length > 0 && (
           <Block
@@ -63,8 +62,7 @@ const HeaderSearch = ({
             justifyCenter
             radius={9}
             top={20}
-            alignSelfEnd
-          >
+            alignSelfEnd>
             <Text fontSize={10} color={COLORS.white} bold>
               {listItemCart?.food?.length || 0}
             </Text>
@@ -76,14 +74,16 @@ const HeaderSearch = ({
 
   return (
     <Block>
-      <StatusBar backgroundColor={backgroundColor ? backgroundColor : 'primary'} barStyle={barStyle} />
+      <StatusBar
+        backgroundColor={backgroundColor ? backgroundColor : 'primary'}
+        barStyle={barStyle}
+      />
       <Block
         row
         alignCenter
         height={HEADER.height}
         padding={SIZES.medium}
-        backgroundColor={backgroundColor ? backgroundColor : 'primary'}
-      >
+        backgroundColor={backgroundColor ? backgroundColor : 'primary'}>
         {(goBack || onGoBack) && _renderIconBack()}
         <Block
           flex={1}
@@ -92,11 +92,15 @@ const HeaderSearch = ({
           paddingHorizontal={10}
           marginHorizontal={5}
           rowCenter
-          backgroundColor={'white'}
-        >
+          backgroundColor={'white'}>
           {textSearch.length <= 0 && (
             <Block width={40} height={45} justifyCenter alignCenter>
-              <Icon IconType={AntDesign} iconName="search1" iconColor={COLORS.gray} ICONSize={20} />
+              <Icon
+                IconType={AntDesign}
+                iconName="search1"
+                iconColor={COLORS.gray}
+                ICONSize={20}
+              />
             </Block>
           )}
 

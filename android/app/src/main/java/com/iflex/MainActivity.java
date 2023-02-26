@@ -1,7 +1,7 @@
 package com.iflex;
 
 import com.facebook.react.ReactActivity;
-
+import com.sensors.RNSensorsPackage;
 public class MainActivity extends ReactActivity {
 
   /**

@@ -1,3 +1,5 @@
+/** @format */
+
 import React from 'react';
 import Entypo from 'react-native-vector-icons/Entypo';
 import {
@@ -9,22 +11,20 @@ import {
   Pressable,
   Text,
 } from '@components';
-import {useSelector} from 'react-redux';
-import {COLORS} from '@theme';
-import {useDispatch} from 'react-redux';
-import actions from '@redux/actions';
+import { useSelector } from 'react-redux';
+import { COLORS } from '@theme';
+import { useDispatch } from 'react-redux';
+import actions from 'store/actions';
 import Toast from 'react-native-toast-message';
 
-export default function ListExtraOptionsScreen({route}) {
+export default function ListExtraOptionsScreen({ route }) {
   const data = route?.params?.data;
   const getExtraOptions = useSelector(state => state.getExtraOptions?.data);
   const isLoading = useSelector(state => state.connectExtraOptions.isLoading);
   const dispatch = useDispatch();
 
-  const RenderItem = ({item, index}) => {
-    let isConnect = data.arr_connect.findIndex(
-      x => x.option_id === item.group_id,
-    );
+  const RenderItem = ({ item, index }) => {
+    let isConnect = data.arr_connect.findIndex(x => x.option_id === item.group_id);
     const handleConnectExtraOptions = () => {
       dispatch({
         type: actions.SHOP_CONNECT_EXTRA_OPTION,
@@ -34,8 +34,8 @@ export default function ListExtraOptionsScreen({route}) {
           action: isConnect === -1 ? 'connect' : 'disconnect',
         },
         onSuccess: res => {
-          dispatch({type: actions.SHOP_GET_EXTRA_OPTION});
-          dispatch({type: actions.SHOP_GET_PRODUCT});
+          dispatch({ type: actions.SHOP_GET_EXTRA_OPTION });
+          dispatch({ type: actions.SHOP_GET_PRODUCT });
           Toast.show({
             type: 'success',
             text1: res.message,
@@ -93,7 +93,7 @@ export default function ListExtraOptionsScreen({route}) {
         VSeparator={1}
         data={getExtraOptions}
         renderItem={RenderItem}
-        containerProps={{flex: 1}}
+        containerProps={{ flex: 1 }}
         keyExtractor={(item, index) => index.toString()}
         ListHeaderComponent={
           <Text medium fontSize={14} padding={15} color={'#333333'}>

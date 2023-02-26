@@ -1,5 +1,7 @@
-import React, {Fragment, useEffect, useRef, useState} from 'react';
-import formConfig, {FORM_INPUT} from './components/FormConfig';
+/** @format */
+
+import React, { Fragment, useEffect, useRef, useState } from 'react';
+import formConfig, { FORM_INPUT } from './components/FormConfig';
 
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import {
@@ -19,34 +21,34 @@ import {
   RenderLable,
   RenderNote,
 } from './components/Utils';
-import {COLORS, FONTS} from '@theme';
-import {StyleSheet, ScrollView} from 'react-native';
-import {useForm} from 'react-hook-form';
-import {icons} from '@assets';
-import {useSafeAreaInsets} from 'react-native-safe-area-context';
-import {useDispatch} from 'react-redux';
-import actions from '@redux/actions';
-import {width} from '@utils/responsive';
+import { COLORS, FONTS } from '@theme';
+import { StyleSheet, ScrollView } from 'react-native';
+import { useForm } from 'react-hook-form';
+import { icons } from '@assets';
+import { useSafeAreaInsets } from 'react-native-safe-area-context';
+import { useDispatch } from 'react-redux';
+import actions from 'store/actions';
+import { width } from '@utils/responsive';
 import Footer from './components/Footer';
 import ModalFormOption from './components/ModalFormOption';
 
 const Obligatory = [
-  {label: 'Có, bắt buộc', value: 1},
-  {label: 'Không bắt buộc', value: 0},
+  { label: 'Có, bắt buộc', value: 1 },
+  { label: 'Không bắt buộc', value: 0 },
 ];
 
 const Types = [
-  {label: '1 loại', value: 1},
-  {label: 'Nhiều loại', value: 0},
+  { label: '1 loại', value: 1 },
+  { label: 'Nhiều loại', value: 0 },
 ];
 
-export default function ShopFormOptionGroupScreen({route}) {
+export default function ShopFormOptionGroupScreen({ route }) {
   const extraOption = route?.params?.data;
   const dispatch = useDispatch();
 
   const scrollRef = useRef();
-  const {bottom} = useSafeAreaInsets();
-  const {control, handleSubmit, setValue, watch} = useForm(formConfig);
+  const { bottom } = useSafeAreaInsets();
+  const { control, handleSubmit, setValue, watch } = useForm(formConfig);
   const [arranged, setArranged] = useState([]);
   const [typeModal, setTypeModal] = useState(null);
   const [optionItemClick, setOptionItemClick] = useState(null);
@@ -86,7 +88,7 @@ export default function ShopFormOptionGroupScreen({route}) {
   useEffect(() => {
     setValue(FORM_INPUT.quantity, 1);
     setValue(FORM_INPUT.isRequired, 1);
-    dispatch({type: actions.SHOP_GET_EXTRA_OPTION});
+    dispatch({ type: actions.SHOP_GET_EXTRA_OPTION });
   }, []);
 
   useEffect(() => {
@@ -130,12 +132,12 @@ export default function ShopFormOptionGroupScreen({route}) {
         canGoBack
         title={extraOption ? 'Chỉnh sửa' : 'Thêm' + ' nhóm tùy chọn'}
         colorIcon="#000000"
-        titleProps={{color: '#000000'}}
+        titleProps={{ color: '#000000' }}
         backgroundColor={COLORS.white}
       />
       <ScrollView
         showsVerticalScrollIndicator={false}
-        style={{flex: 1}}
+        style={{ flex: 1 }}
         nestedScrollEnabled={true}
         ref={scrollRef}
         scrollEnabled={scrollenabled}
@@ -218,15 +220,13 @@ export default function ShopFormOptionGroupScreen({route}) {
                 backgroundColor={COLORS.white}>
                 <FormInput
                   editable={
-                    watchQuantityState === 0 && watchRequiredState === 0
-                      ? false
-                      : true
+                    watchQuantityState === 0 && watchRequiredState === 0 ? false : true
                   }
                   width={(width - 45) / 2}
                   control={control}
                   label="Tối thiểu"
                   numberValueType
-                  inputProps={{keyboardType: 'number-pad'}}
+                  inputProps={{ keyboardType: 'number-pad' }}
                   placeholder={'Nhập Tối thiểu'}
                   name={FORM_INPUT.min}
                   customInput={RenderInputMin}
@@ -240,7 +240,7 @@ export default function ShopFormOptionGroupScreen({route}) {
                   label="Tối đa"
                   numberValueType
                   placeholder={'Nhập Tối đa'}
-                  inputProps={{keyboardType: 'number-pad'}}
+                  inputProps={{ keyboardType: 'number-pad' }}
                   name={FORM_INPUT.max}
                   styles={styles.inputStyle}
                   customInput={RenderInput}
@@ -305,20 +305,13 @@ const RenderCheckbox = ({
             justifyCenter
             borderWidth={1}
             marginRight={20}
-            borderColor={
-              item?.value === watch ? COLORS.primary : COLORS.border2
-            }>
+            borderColor={item?.value === watch ? COLORS.primary : COLORS.border2}>
             <Block
               round={13}
-              backgroundColor={
-                item?.value === watch ? COLORS.primary : COLORS.border2
-              }
+              backgroundColor={item?.value === watch ? COLORS.primary : COLORS.border2}
             />
           </Block>
-          <Text
-            regular
-            fontSize={16}
-            color={disabled ? COLORS.gray6 : COLORS.black}>
+          <Text regular fontSize={16} color={disabled ? COLORS.gray6 : COLORS.black}>
             {item?.label}
           </Text>
         </Pressable>
@@ -329,7 +322,7 @@ const RenderCheckbox = ({
 
 const CustomItems =
   (setShowModalFormOption, setTypeModal, setOptionItemClick) =>
-  ({index, data}) => {
+  ({ index, data }) => {
     return (
       <Block
         rowCenter
@@ -346,7 +339,7 @@ const CustomItems =
           onPress={() => {
             setShowModalFormOption(true);
             setTypeModal(false);
-            setOptionItemClick({...data, index: index});
+            setOptionItemClick({ ...data, index: index });
           }}>
           <Block flex rowCenter spaceBetween>
             <Text medium fontSize={14} marginLeft={20} numberOfLines={1}>
@@ -354,11 +347,7 @@ const CustomItems =
             </Text>
           </Block>
           <Block rowCenter spaceBetween>
-            <Text
-              regular
-              fontSize={14}
-              marginRight={10}
-              color={COLORS.placeholder}>
+            <Text regular fontSize={14} marginRight={10} color={COLORS.placeholder}>
               +{data?.price}
             </Text>
             <Icon

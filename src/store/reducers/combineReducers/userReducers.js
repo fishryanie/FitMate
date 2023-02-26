@@ -1,7 +1,7 @@
 /** @format */
 
-import actions from '@redux/actions';
-import { reducerDefault } from '@redux/common/reducers';
+import actions from 'store/actions';
+import { reducerDefault } from 'store/common/reducers';
 
 const initialState = {
   data: null,
@@ -10,7 +10,6 @@ const initialState = {
   accessToken: null,
   refreshToken: null,
   isLoading: false,
-  isSaveAccount: false,
 };
 
 const initProducts = {
@@ -77,6 +76,12 @@ export const user = (state = initialState, action) => {
         ...state,
         accessToken: action.accessToken,
         refreshToken: action.refreshToken,
+      };
+    case actions.SAVE_USER_LOGIN:
+      return {
+        ...state,
+        username: action.username,
+        password: action.password,
       };
     case actions.LOGOUT_APP:
       return { ...state, accessToken: null, refreshToken: null };

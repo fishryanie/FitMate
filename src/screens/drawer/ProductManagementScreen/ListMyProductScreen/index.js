@@ -1,3 +1,5 @@
+/** @format */
+
 import React from 'react';
 import {
   Block,
@@ -10,22 +12,22 @@ import {
   Pressable,
   Text,
 } from '@components';
-import {useDispatch, useSelector} from 'react-redux';
-import {useEffect} from 'react';
-import actions, {_onUnmount} from '@redux/actions';
-import {COLORS} from '@theme';
-import {convertCurrency} from '@utils';
-import {LOTTIES} from '@assets';
+import { useDispatch, useSelector } from 'react-redux';
+import { useEffect } from 'react';
+import actions, { _onUnmount } from 'store/actions';
+import { COLORS } from '@theme';
+import { convertCurrency } from '@utils';
+import { LOTTIES } from '@assets';
 import Toast from 'react-native-toast-message';
 import Entypo from 'react-native-vector-icons/Entypo';
 
-export default function ShopListMyProductScreen({route}) {
+export default function ShopListMyProductScreen({ route }) {
   const option = route?.params?.option;
   const getStoreProduct = useSelector(state => state.getStoreProduct);
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch({type: actions.SHOP_GET_PRODUCT});
+    dispatch({ type: actions.SHOP_GET_PRODUCT });
     return () => {
       // dispatch({type: _onUnmount(actions.SHOP_GET_PRODUCT)});
     };
@@ -49,9 +51,9 @@ export default function ShopListMyProductScreen({route}) {
         VSeparator={5}
         safeAreaBottom
         paddingHorizontal={15}
-        style={{flex: 1}}
+        style={{ flex: 1 }}
         EmptyComponent={<EmptyData source={LOTTIES.empty_box} />}
-        renderItem={({item, index}) => {
+        renderItem={({ item, index }) => {
           let isConnect = item.arr_connect.findIndex(
             x => x.option_id === option.group_id,
           );
@@ -64,8 +66,8 @@ export default function ShopListMyProductScreen({route}) {
                 action: isConnect === -1 ? 'connect' : 'disconnect',
               },
               onSuccess: res => {
-                dispatch({type: actions.SHOP_GET_EXTRA_OPTION});
-                dispatch({type: actions.SHOP_GET_PRODUCT});
+                dispatch({ type: actions.SHOP_GET_EXTRA_OPTION });
+                dispatch({ type: actions.SHOP_GET_PRODUCT });
                 Toast.show({
                   type: 'success',
                   text1: res.message,

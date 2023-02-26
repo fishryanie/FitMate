@@ -1,7 +1,7 @@
 /** @format */
 
 import moment from 'moment';
-import actions from '@redux/actions';
+import actions from 'store/actions';
 import React, { useEffect, useState } from 'react';
 import formConfig, { FORM_INPUT } from './formConfig';
 import { useForm } from 'react-hook-form';

@@ -1,21 +1,15 @@
-import {
-  Block,
-  Icon,
-  Image,
-  Pressable,
-  StatusBar,
-  Text,
-  UserAvatar,
-} from '@components';
-import {commonRoot} from '@routes/Ref';
+/** @format */
+
+import { Block, Icon, Image, Pressable, StatusBar, Text, UserAvatar } from '@components';
+import { commonRoot } from '@routes/Ref';
 import router from '@routes/router';
-import actions from '@redux/actions';
-import {COLORS} from '@theme';
-import React, {useEffect, useState} from 'react';
+import actions from 'store/actions';
+import { COLORS } from '@theme';
+import React, { useEffect, useState } from 'react';
 import IonICONS from 'react-native-vector-icons/IonICONS';
-import {IMAGES} from '@assets';
-import {t} from 'i18next';
-import {useDispatch, useSelector} from 'react-redux';
+import { IMAGES } from '@assets';
+import { t } from 'i18next';
+import { useDispatch, useSelector } from 'react-redux';
 const HeaderHome = () => {
   const dispatch = useDispatch();
   const getUser = useSelector(state => state.getUser?.data);
@@ -28,9 +22,7 @@ const HeaderHome = () => {
       dispatch({
         type: actions.GET_NOTIFICATION,
         onSuccess() {
-          const length = getNotification?.filter(
-            e => e.status === 'reading',
-          )?.length;
+          const length = getNotification?.filter(e => e.status === 'reading')?.length;
           setNumberLength(length);
         },
       });

@@ -1,7 +1,7 @@
 /** @format */
 
 import React, { useEffect } from 'react';
-import actions, { _onUnmount } from '@redux/actions';
+import actions, { _onUnmount } from 'store/actions';
 import { ListWrapper, Block, Image, Text, EmptyData } from '@components';
 import { shopCommonRoot } from '@navigation/navigationRef';
 import { LOTTIES } from '@assets';

@@ -1,7 +1,7 @@
 /** @format */
 
 import api from '@utils/api';
-import actions, { _onFail, _onSuccess } from '@redux/actions';
+import actions, { _onFail, _onSuccess } from 'store/actions';
 import { put, takeLatest } from 'redux-saga/effects';
 import { URL_API } from '../common';
 

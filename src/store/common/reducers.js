@@ -1,16 +1,18 @@
-import {_onFail, _onSuccess, _onUnmount} from '@redux/actions';
-import {stateDefault, stateDevice, stateLoadMore} from './initialStates';
+/** @format */
+
+import { _onFail, _onSuccess, _onUnmount } from 'store/actions';
+import { stateDefault, stateDevice, stateLoadMore } from './initialStates';
 
 export const reducerDefault = (state = stateDefault, action, Action) => {
   switch (action.type) {
     case Action:
-      return {...state, isLoading: true};
+      return { ...state, isLoading: true };
     case _onSuccess(Action):
-      return {data: action.data, isLoading: false, exData: action.exData};
+      return { data: action.data, isLoading: false, exData: action.exData };
     case _onFail(Action):
-      return {...state, isLoading: false};
+      return { ...state, isLoading: false };
     case _onUnmount(Action):
-      return {...stateDefault};
+      return { ...stateDefault };
     default:
       return state;
   }
@@ -33,7 +35,7 @@ export const reducerDevice = (state = stateDevice, action, Action) => {
 export const reducerLoadMore = (state = stateLoadMore, action, Action) => {
   switch (action.type) {
     case Action:
-      return {...state, isLoading: true};
+      return { ...state, isLoading: true };
     case _onSuccess(Action):
       const page = action.page;
       return {
@@ -46,7 +48,7 @@ export const reducerLoadMore = (state = stateLoadMore, action, Action) => {
         totalUnread: action?.totalUnread,
       };
     case _onFail(Action):
-      return {...state, isLoading: false};
+      return { ...state, isLoading: false };
     case _onUnmount(Action):
       return stateLoadMore;
     default:
@@ -54,14 +56,10 @@ export const reducerLoadMore = (state = stateLoadMore, action, Action) => {
   }
 };
 
-export const reducerLoadMoreObject = (
-  state = stateLoadMore,
-  action,
-  Action,
-) => {
+export const reducerLoadMoreObject = (state = stateLoadMore, action, Action) => {
   switch (action.type) {
     case Action:
-      return {...state, isLoading: true};
+      return { ...state, isLoading: true };
     case _onSuccess(Action):
       const page = action.page;
       let merged = [...(state.data || [])];
@@ -71,7 +69,7 @@ export const reducerLoadMoreObject = (
         if (foundIndex > -1) {
           merged[foundIndex].data = [...merged[foundIndex].data, ...value];
         } else {
-          merged.push({title: key, data: value});
+          merged.push({ title: key, data: value });
         }
       }
       return {
@@ -79,7 +77,7 @@ export const reducerLoadMoreObject = (
           page > 1
             ? merged
             : Object.entries(action.data).map(([key, value]) => {
-                return {title: key, data: value};
+                return { title: key, data: value };
               }),
         totalPage: action.totalPage,
         page,
@@ -87,7 +85,7 @@ export const reducerLoadMoreObject = (
         isLoading: false,
       };
     case _onFail(Action):
-      return {...state, isLoading: false};
+      return { ...state, isLoading: false };
     case _onUnmount(Action):
       return stateLoadMore;
     default:
@@ -98,7 +96,7 @@ export const reducerLoadMoreObject = (
 export const reducerAdvance = (state = stateLoadMore, action, Action) => {
   switch (action.type) {
     case Action:
-      return {...state, isLoading: true};
+      return { ...state, isLoading: true };
     case _onSuccess(Action): {
       const data = state.data ? [...state.data, ...action.data] : action.data;
       return {
@@ -109,9 +107,9 @@ export const reducerAdvance = (state = stateLoadMore, action, Action) => {
       };
     }
     case _onFail(Action):
-      return {...state, isLoading: false};
+      return { ...state, isLoading: false };
     case _onUnmount(Action):
-      return {...stateLoadMore};
+      return { ...stateLoadMore };
     default:
       return state;
   }

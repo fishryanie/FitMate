@@ -1,7 +1,7 @@
 /** @format */
 
-import store from '@redux/store';
 import axios from 'axios';
+import { store } from '@store';
 import { handleExpiredToken, throttle } from './helper';
 
 // axios.defaults.baseURL = 'https://iflex.onrender.com/api/v1/';

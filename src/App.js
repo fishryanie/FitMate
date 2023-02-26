@@ -1,21 +1,18 @@
 /** @format */
 
-import React, { PureComponent, useEffect } from 'react';
-import store, { persistor } from '@redux/store';
-import { useFCMToken, useNotificationMessage, useNotificationPermission } from '@hooks';
+import React, { PureComponent } from 'react';
+import { store, persistor } from '@store';
 import { PersistGate } from 'redux-persist/lib/integration/react';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 import { CodePushProgressDialog } from '@components';
 import { Text, TextInput } from 'react-native';
-import { Provider, useDispatch, useSelector } from 'react-redux';
+import { Provider } from 'react-redux';
 import { NetWork } from '@components';
 import MainContainer from '@routes';
 import codePush from 'react-native-code-push';
 import SplashScreen from 'react-native-splash-screen';
 import Toast from 'react-native-toast-message';
-import i18n from './i18n';
 import 'moment/locale/vi';
-import actions from '@redux/actions';
 
 if (Text.defaultProps == null) {
   Text.defaultProps = {};
@@ -25,20 +22,6 @@ if (TextInput.defaultProps == null) {
   TextInput.defaultProps = {};
 }
 TextInput.defaultProps.allowFontScaling = false;
-
-const App = () => {
-  useNotificationPermission();
-  useNotificationMessage();
-
-  const accessToken = useSelector(state => state.user.accessToken);
-  const getConfigsApp = useSelector(state => state.getConfigsApp);
-  const dispatch = useDispatch();
-  useEffect(() => {
-    SplashScreen.hide();
-  }, [dispatch]);
-
-  return <MainContainer />;
-};
 
 class AppWrapper extends PureComponent {
   state = {
@@ -54,13 +37,17 @@ class AppWrapper extends PureComponent {
     this.setState({ progress });
   }
 
+  componentDidMount() {
+    SplashScreen.hide();
+  }
+
   render() {
     return (
       <Provider store={store}>
         <PersistGate loading={null} persistor={persistor}>
           <SafeAreaProvider>
-            <App />
             <NetWork />
+            <MainContainer />
             <Toast visibilityTime={2000} />
             {(this.state.status === codePush.SyncStatus.DOWNLOADING_PACKAGE ||
               this.state.status === codePush.SyncStatus.INSTALLING_UPDATE) && (

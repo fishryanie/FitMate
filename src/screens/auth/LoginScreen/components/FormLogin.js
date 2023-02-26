@@ -14,11 +14,11 @@ export default function FormLogin({ control }) {
     <Block flex={3} justifyStart paddingHorizontal={15}>
       <FormInput
         require
+        marginBottom={25}
         name={FORM_LOGIN.username}
         control={control}
         label={'Username'}
         placeholder="Enter your email or phone number"
-        borderBottomWidth={1}
         renderIconLeft={
           <Pressable marginRight={15} onPress={() => setShowPass(!showPass)}>
             <Icon IconType={FontAwesome} color={COLORS.grey800} iconName={'user'} />
@@ -29,7 +29,6 @@ export default function FormLogin({ control }) {
         require
         label="Password"
         control={control}
-        borderBottomWidth={1}
         name={FORM_LOGIN.password}
         placeholder="Enter your password"
         secureTextEntry={!showPass}
@@ -40,7 +39,11 @@ export default function FormLogin({ control }) {
         }
         renderIconRight={
           <Pressable marginLeft={15} onPress={() => setShowPass(!showPass)}>
-            <Icon IconType={Entypo} color={COLORS.grey600} iconName={showPass ? 'eye' : 'eye-with-line'} />
+            <Icon
+              IconType={Entypo}
+              color={COLORS.grey600}
+              iconName={showPass ? 'eye' : 'eye-with-line'}
+            />
           </Pressable>
         }
       />

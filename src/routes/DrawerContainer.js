@@ -31,8 +31,12 @@ export default function DrawerContainer() {
         component={drawer[router.TERMS_POLICY_SCREEN]}
       />
       <DrawerStack.Screen
-        name={router.SAVE_LOCATION_SCREEN}
-        component={drawer[router.SAVE_LOCATION_SCREEN]}
+        name={router.LOCATION_FORM_SCREEN}
+        component={drawer[router.LOCATION_FORM_SCREEN]}
+      />
+      <DrawerStack.Screen
+        name={router.LOCATION_SAVED_SCREEN}
+        component={drawer[router.LOCATION_SAVED_SCREEN]}
       />
       <DrawerStack.Screen
         name={router.ORDER_HISTORY_SCREEN}

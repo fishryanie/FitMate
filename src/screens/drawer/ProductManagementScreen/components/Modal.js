@@ -1,7 +1,7 @@
 /** @format */
 
 import React, { useState } from 'react';
-import actions from '@redux/actions';
+import actions from 'store/actions';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import { Block, Button, Icon, Modal, Pressable, Text } from '@components';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';

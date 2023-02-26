@@ -1,8 +1,8 @@
 /** @format */
 
 import React, { Fragment, useEffect, useRef, useState } from 'react';
+import actions, { _onUnmount } from '@store/actions';
 import router from './router';
-import actions, { _onUnmount } from '@redux/actions';
 import Feather from 'react-native-vector-icons/Feather';
 import AntDesign from 'react-native-vector-icons/AntDesign';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
@@ -15,6 +15,7 @@ import {
   PopupAccept,
   Pressable,
   Text,
+  TouchableOpacity,
 } from '@components';
 import { Animated, StyleSheet } from 'react-native';
 import { bottom } from '@screens/bottom';
@@ -30,12 +31,14 @@ const Bottom = createBottomTabNavigator();
 
 export default function BottomContainer() {
   const { t } = useTranslation();
-  const insets = useSafeAreaInsets();
   const dispatch = useDispatch();
-  const isDrawer = useSelector(state => state.other.isDrawer);
+  const insets = useSafeAreaInsets();
+  const isDrawer = useSelector(state => state.app.isDrawer);
+  const isActiveBiometrics = useSelector(state => state.app.isActiveBiometrics);
   const drawerOffset = useRef(new Animated.Value(0)).current;
   const [isFocusDrawer, setFocusDrawer] = useState(null);
   const [isShowAcceptLogout, setShowAcceptLogout] = useState(false);
+  const [isShowPopupSaveSignIn, setShowPopupSaveSignIn] = useState(!isActiveBiometrics);
 
   const handleLogOut = () => {
     dispatch({ type: actions.LOGOUT_APP });
@@ -43,6 +46,25 @@ export default function BottomContainer() {
     dispatch({ type: _onUnmount(actions.GET_ONE_USER) });
     Toast.show({ type: 'success', text1: 'Logout success' });
   };
+
+  const handleSaveSignIn = type => {
+    if (type === 'save') {
+      dispatch({ type: actions.ACTIVE_BIOMETRICS, isActive: true });
+      Toast.show({ type: 'success', text1: 'Save logout success' });
+      return setShowPopupSaveSignIn(false);
+    }
+    dispatch({ type: actions.ACTIVE_BIOMETRICS, isActive: false });
+    dispatch({ type: actions.SAVE_USER_LOGIN, username: '', password: '' });
+    return setShowPopupSaveSignIn(false);
+  };
+
+  useEffect(() => {
+    Animated.timing(drawerOffset, {
+      duration: 300,
+      toValue: isDrawer ? 1 : 0,
+      useNativeDriver: true,
+    }).start();
+  }, [isDrawer, drawerOffset]);
 
   const animatedStyles = {
     borderRadius: drawerOffset.interpolate({
@@ -105,7 +127,7 @@ export default function BottomContainer() {
         [router.PROFILE_SCREEN]: t('BottomTab.Profile'),
       };
       return (
-        <Pressable flex alignCenter justifyCenter onPress={onPress}>
+        <TouchableOpacity flex alignCenter justifyCenter onPress={onPress}>
           {isPlus ? (
             <Image source={icon[route.name]} square={45} resizeMode="contain" />
           ) : (
@@ -125,18 +147,10 @@ export default function BottomContainer() {
               </Text>
             </Fragment>
           )}
-        </Pressable>
+        </TouchableOpacity>
       );
     },
   });
-
-  useEffect(() => {
-    Animated.timing(drawerOffset, {
-      duration: 300,
-      toValue: isDrawer ? 1 : 0,
-      useNativeDriver: true,
-    }).start();
-  }, [isDrawer, drawerOffset]);
 
   return (
     <Block flex>
@@ -199,6 +213,22 @@ export default function BottomContainer() {
         </Text>
       </Block>
 
+      <PopupAccept
+        title="Save Logout"
+        description="Do you want to save your account?"
+        isShow={isShowPopupSaveSignIn}
+        onShow={setShowPopupSaveSignIn}
+        onAccept={() => handleSaveSignIn('save')}
+        onClose={() => handleSaveSignIn('unSave')}
+      />
+      <PopupAccept
+        title="Accept Logout"
+        description="Are you sure you want to sign out?"
+        isShow={isShowAcceptLogout}
+        onShow={setShowAcceptLogout}
+        onAccept={handleLogOut}
+        onClose={() => setShowAcceptLogout(false)}
+      />
       <Animated.View style={[styles.container, { ...animatedStyles }]}>
         <Bottom.Navigator
           backBehavior="initialRoute"
@@ -226,15 +256,6 @@ export default function BottomContainer() {
           />
         </Bottom.Navigator>
       </Animated.View>
-
-      <PopupAccept
-        title="Accept Logout"
-        description="Are you sure you want to sign out?"
-        isShow={isShowAcceptLogout}
-        onShow={setShowAcceptLogout}
-        onAccept={handleLogOut}
-        onClose={() => setShowAcceptLogout(false)}
-      />
     </Block>
   );
 }
@@ -248,18 +269,5 @@ const styles = StyleSheet.create({
     right: 0,
     position: 'absolute',
     overflow: 'hidden',
-  },
-  screen: {
-    flex: 1,
-    elevation: 3,
-    height: hs(55),
-    borderRadius: hs(20),
-    shadowRadius: 2.22,
-    shadowOpacity: 0.22,
-    position: 'absolute',
-    marginHorizontal: hs(15),
-    shadowColor: COLORS.dark,
-    backgroundColor: COLORS.primary,
-    shadowOffset: { width: 0, height: 1 },
   },
 });

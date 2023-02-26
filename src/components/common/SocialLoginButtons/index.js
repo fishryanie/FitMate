@@ -6,7 +6,7 @@ import { useBiometrics, useCustomToast, useDeviceName, useFCMToken } from '@hook
 import appleAuth from '@invertase/react-native-apple-authentication';
 import { authRoot, bottomRoot } from '@routes/Ref';
 import router from '@routes/router';
-import actions from '@redux/actions';
+import actions from 'store/actions';
 import { COLORS } from '@theme';
 import { throttle } from '@utils/helper';
 import React, { useState } from 'react';
@@ -164,8 +164,7 @@ const SocialLoginButtons = ({ containterProps }) => {
             backgroundColor={COLORS.whiteGray}
             justifyCenter
             alignCenter
-            marginHorizontal={18}
-          >
+            marginHorizontal={18}>
             <Image source={icons.ic_google} width={36} height={21} />
           </Pressable>
           {appleAuth.isSupported && (
@@ -174,8 +173,7 @@ const SocialLoginButtons = ({ containterProps }) => {
               round={40}
               backgroundColor={COLORS.whiteGray}
               justifyCenter
-              alignCenter
-            >
+              alignCenter>
               <Image source={icons.ic_apple} width={36} height={21} />
             </Pressable>
           )}
@@ -185,11 +183,14 @@ const SocialLoginButtons = ({ containterProps }) => {
               round={40}
               backgroundColor={COLORS.whiteGray}
               justifyCenter
-              alignCenter
-            >
+              alignCenter>
               <Icon
                 IconType={MaterialCommunityIcons}
-                iconName={biometryType === ReactNativeBiometrics.FaceID ? 'face-recognition' : 'fingerprint'}
+                iconName={
+                  biometryType === ReactNativeBiometrics.FaceID
+                    ? 'face-recognition'
+                    : 'fingerprint'
+                }
                 color={COLORS.primary}
                 iconSize={25}
               />

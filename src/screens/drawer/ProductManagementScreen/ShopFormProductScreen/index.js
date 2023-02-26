@@ -1,7 +1,7 @@
 /** @format */
 
 import React, { useEffect, useState } from 'react';
-import actions, { _onUnmount } from '@redux/actions';
+import actions, { _onUnmount } from 'store/actions';
 import formConfig, { FORM_INPUT } from './components/FormConfig';
 import MultiImageInput from './components/MultiImageInput';
 import Entypo from 'react-native-vector-icons/Entypo';

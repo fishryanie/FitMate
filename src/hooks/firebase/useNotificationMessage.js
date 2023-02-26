@@ -4,7 +4,7 @@ import { useFCMMessage } from '@hooks';
 import { useEffect } from 'react';
 import messaging from '@react-native-firebase/messaging';
 import { useDispatch, useSelector } from 'react-redux';
-import actions from '@redux/actions';
+import actions from 'store/actions';
 import moment from 'moment';
 import PushNotification, { Importance } from 'react-native-push-notification';
 import { COLORS } from '@theme';

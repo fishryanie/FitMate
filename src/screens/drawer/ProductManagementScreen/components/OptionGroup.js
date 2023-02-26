@@ -6,7 +6,7 @@ import { COLORS } from '@theme';
 import Entypo from 'react-native-vector-icons/Entypo';
 import React, { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import actions from '@redux/actions';
+import actions from 'store/actions';
 import router from '@routes/router';
 import { commonRoot } from '@routes/Ref';
 

@@ -5,8 +5,8 @@
  */
 
 import { CURRENCY } from '@constants';
-import actions, { _onUnmount } from '@redux/actions';
-import store from '@redux/store';
+import actions, { _onUnmount } from 'store/actions';
+import { store } from '@store';
 import I18n from 'i18n';
 import moment from 'moment';
 import { Alert } from 'react-native';
@@ -328,4 +328,3 @@ export const convertOption = (arr_option_tmp, option1, option2, option3) => {
     return checkOption1 && checkOption2 && checkOption3;
   });
 };
-

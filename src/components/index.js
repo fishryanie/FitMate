@@ -9,6 +9,7 @@ import Text from './base/Text';
 import Button from './base/Button';
 import RadioButton from './base/RadioButton';
 import TextInput from './base/TextInput';
+import PriceInput from './base/PriceInput';
 import Pressable from './base/Pressable';
 import StatusBar from './base/StatusBar';
 import ScrollView from './base/ScrollView';
@@ -43,6 +44,7 @@ export {
   Button,
   Pressable,
   TextInput,
+  PriceInput,
   StatusBar,
   ScrollView,
   ListWrapper,

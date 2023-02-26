@@ -1,7 +1,7 @@
 /** @format */
 
 import { put, select, takeLatest } from 'redux-saga/effects';
-import actions, { _onFail, _onSuccess, _onUnmount } from '@redux/actions';
+import actions, { _onFail, _onSuccess, _onUnmount } from 'store/actions';
 import { handleFormData } from '@utils/helper';
 import api from '@utils/api';
 import { URL_API } from '../common';

@@ -10,7 +10,7 @@ import { width } from '@responsive';
 import { commonRoot } from '@routes/Ref';
 import router from '@routes/router';
 import { useDispatch } from 'react-redux';
-import actions from '@redux/actions';
+import actions from 'store/actions';
 import { useEffect } from 'react';
 import { useSelector } from 'react-redux';
 

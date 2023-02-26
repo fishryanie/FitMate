@@ -6,7 +6,7 @@ import router from '@routes/router';
 import PushNotificationIOS from '@react-native-community/push-notification-ios';
 import messaging from '@react-native-firebase/messaging';
 import { useNavigation } from '@react-navigation/native';
-import actions from '@redux/actions';
+import actions from 'store/actions';
 import { COLORS } from '@theme';
 import moment from 'moment';
 import { useEffect, useState } from 'react';
@@ -21,7 +21,11 @@ export default function useFCMMessage(isLog) {
   useEffect(() => {
     const onMessageListener = messaging().onMessage(message => {
       if (__DEV__ && isLog) {
-        console.log('%c FIREBASE_MESSAGE_FORE_GROUND: ', 'color: yellow; font-weight: bold', message);
+        console.log(
+          '%c FIREBASE_MESSAGE_FORE_GROUND: ',
+          'color: yellow; font-weight: bold',
+          message,
+        );
       }
       setFMessage(message);
       if (message.data?.type === 'message') {
@@ -55,34 +59,40 @@ export default function useFCMMessage(isLog) {
   }, []);
 
   useEffect(() => {
-    const onNotificationOpenedAppListener = messaging().onNotificationOpenedApp(message => {
-      setFMessage(message);
-      if (__DEV__ && isLog) {
-        console.log('%c FIREBASE_MESSAGE_NOTIFICATION_OPEN_APP: ', 'color: yellow; font-weight: bold', message);
-      }
-      if (Platform.OS === 'ios' && message?.data?.url) {
-        if (message?.data?.url !== 'ROOM_CHAT_SCREEN') {
+    const onNotificationOpenedAppListener = messaging().onNotificationOpenedApp(
+      message => {
+        setFMessage(message);
+        if (__DEV__ && isLog) {
+          console.log(
+            '%c FIREBASE_MESSAGE_NOTIFICATION_OPEN_APP: ',
+            'color: yellow; font-weight: bold',
+            message,
+          );
+        }
+        if (Platform.OS === 'ios' && message?.data?.url) {
+          if (message?.data?.url !== 'ROOM_CHAT_SCREEN') {
+            commonRoot.navigate(message?.data?.url, {
+              id: message?.data?.item_id,
+            });
+          } else {
+            dispatch({
+              type: actions.GET_INFO_STORE,
+              params: { department_id: message?.data?.department_id },
+              onSuccess: res => {
+                commonRoot.navigate(message?.data?.url, {
+                  id: message?.data?.item_id,
+                  department: res,
+                });
+              },
+            });
+          }
+        } else {
           commonRoot.navigate(message?.data?.url, {
             id: message?.data?.item_id,
           });
-        } else {
-          dispatch({
-            type: actions.GET_INFO_STORE,
-            params: { department_id: message?.data?.department_id },
-            onSuccess: res => {
-              commonRoot.navigate(message?.data?.url, {
-                id: message?.data?.item_id,
-                department: res,
-              });
-            },
-          });
         }
-      } else {
-        commonRoot.navigate(message?.data?.url, {
-          id: message?.data?.item_id,
-        });
-      }
-    });
+      },
+    );
     return onNotificationOpenedAppListener;
   }, []);
 
@@ -96,7 +106,7 @@ export default function useFCMMessage(isLog) {
             console.log(
               '%c FIREBASE_MESSAGE_NOTIFICATION_OPEN_FROM_QUIT_STATE: ',
               'color: yellow; font-weight: bold',
-              message
+              message,
             );
           }
         }

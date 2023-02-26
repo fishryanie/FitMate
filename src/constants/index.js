@@ -61,6 +61,11 @@ export const APP_LANGUAGE = {
   lao: 'lo',
 };
 
+export const APP_LANGUAGE_DATA = [
+  { label: 'VI', value: APP_LANGUAGE.vietnamese, flag: '' },
+  { label: 'EN', value: APP_LANGUAGE.english, flag: '' },
+];
+
 export const ORDER_RUBY_TYPE = {
   buy: 'buy',
   sell: 'sell',

@@ -8,6 +8,11 @@ export default {
     Plan: 'Kế hoạch',
     Profile: 'Tài khoản',
   },
+  Login: {
+    buttonSubmit: 'Đăng nhập',
+    otherOption: 'Tuỳ chọn khác',
+    title: 'Fitness Simplified',
+  },
   Common: {
     data_empty: 'Chưa có dữ liệu',
   },

@@ -1,32 +1,24 @@
 /** @format */
 
-import React, {useState} from 'react';
-import {
-  Block,
-  Button,
-  Icon,
-  Text,
-  FormInput,
-  TouchableOpacity,
-} from '@components';
-import {useSafeAreaInsets} from 'react-native-safe-area-context';
-import {useKeyboard} from '@react-native-community/hooks';
-import {AntDesign} from 'react-native-vector-icons';
-import {COLORS, SIZES} from '@theme';
-import {commonRoot, root} from 'routes/Ref';
-import {useForm} from 'react-hook-form';
-import {useDispatch} from 'react-redux';
-import {TYPE_SUBMIT_AUTH} from '@constants';
+import React, { useState } from 'react';
+import { Block, Button, Icon, Text, TouchableOpacity, TextInput } from '@components';
+import { useSafeAreaInsets } from 'react-native-safe-area-context';
+import { useKeyboard } from '@react-native-community/hooks';
+import { AntDesign } from 'react-native-vector-icons';
+import { COLORS, SIZES } from '@theme';
+import { commonRoot, root } from 'routes/Ref';
+import { useDispatch } from 'react-redux';
+import { TYPE_SUBMIT_AUTH } from '@constants';
 import Toast from 'react-native-toast-message';
-import actions from '@redux/actions';
+import actions from 'store/actions';
 import router from 'routes/router';
 
-export default function RegisterScreen({route}) {
-  const {typeSignUp} = route.params;
-  const {control} = useForm();
-  const {bottom} = useSafeAreaInsets();
-  const {keyboardHeight, keyboardShown} = useKeyboard();
+export default function RegisterScreen({ route }) {
+  const { typeSignUp } = route.params;
+  const { bottom } = useSafeAreaInsets();
+  const { keyboardHeight, keyboardShown } = useKeyboard();
   const [value, setValue] = useState();
+  console.log('🚀 ~ file: index.js:30 ~ RegisterScreen ~ value', value);
 
   const dispatch = useDispatch();
 
@@ -86,32 +78,20 @@ export default function RegisterScreen({route}) {
             IconType={AntDesign}
           />
         </TouchableOpacity>
-        <FormInput
+        <TextInput
           flex
-          name={'phone'}
-          height={50}
-          maxLength={10}
-          control={control}
-          keyboardType="number-pad"
-          borderBottomWidth={1}
-          borderColor={COLORS.border3}
-          inputProps={{height: 50, autoFocus: true, fontSize: 20}}
+          value={value}
+          onChangeValue={setValue}
+          borderWidth={1}
+          borderColor={COLORS.grey300}
         />
       </Block>
       <Text bold marginVertical={10} fontSize={13} color={COLORS.blueGrey200}>
-        A text with verification code will be sent. Message and data rates maybe
-        apply
+        A text with verification code will be sent. Message and data rates maybe apply
       </Text>
 
-      <Block
-        flex
-        justifyEnd
-        paddingBottom={keyboardShown ? keyboardHeight : bottom}>
-        <Text
-          bold
-          lineHeight={22}
-          marginVertical={25}
-          color={COLORS.blueGrey200}>
+      <Block flex justifyEnd paddingBottom={keyboardShown ? keyboardHeight : bottom}>
+        <Text bold lineHeight={22} marginVertical={25} color={COLORS.blueGrey200}>
           By signing in, you agree to IFLEX <Text bold>Privacy Policy</Text> and{' '}
           <Text bold>Terms of Use</Text>
         </Text>

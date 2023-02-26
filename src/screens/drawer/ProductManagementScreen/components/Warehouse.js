@@ -1,7 +1,7 @@
 /** @format */
 
 import React, { useEffect, useState } from 'react';
-import actions, { _onUnmount } from '@redux/actions';
+import actions, { _onUnmount } from 'store/actions';
 import { Block, EmptyData, Loading, ModalCategoriesSaller, Text } from '@components';
 import { FILTER_PRODUCT_SALER } from '@constants';
 import { useSelector } from 'react-redux';

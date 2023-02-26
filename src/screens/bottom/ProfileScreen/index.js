@@ -1,7 +1,7 @@
 /** @format */
 
 import React, { useState } from 'react';
-import actions, { _onUnmount } from '@redux/actions';
+import actions, { _onUnmount } from 'store/actions';
 import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
 import { Block, Icon, Image, Pressable, ScrollView, Text } from '@components';
 import { Alert, Platform } from 'react-native';
@@ -36,16 +36,22 @@ export default function ProfileScreen() {
   };
 
   const showAlert = _isSignout => {
-    Alert.alert(_isSignout ? 'Bạn có thực sự muốn đăng xuất?' : 'Đăng xuất và chuyển đến trang đăng ký tài xế?', '', [
-      {
-        text: 'Huỷ',
-        onPress: () => {},
-      },
-      {
-        text: 'Đồng ý',
-        // onPress: _isSignout ? signOut : redirectToDriverRegister,
-      },
-    ]);
+    Alert.alert(
+      _isSignout
+        ? 'Bạn có thực sự muốn đăng xuất?'
+        : 'Đăng xuất và chuyển đến trang đăng ký tài xế?',
+      '',
+      [
+        {
+          text: 'Huỷ',
+          onPress: () => {},
+        },
+        {
+          text: 'Đồng ý',
+          // onPress: _isSignout ? signOut : redirectToDriverRegister,
+        },
+      ],
+    );
   };
 
   return (
@@ -63,14 +69,24 @@ export default function ProfileScreen() {
               rowCenter
               height={50}
               key={index}
-              onPress={handlePress}
-            >
+              onPress={handlePress}>
               <Image source={item.icon} square={35} resizeMode="contain" />
-              <Block flex rowCenter alignSelf="stretch" marginLeft={16} borderBottomWidth={0.5} borderColor="lineBreak">
+              <Block
+                flex
+                rowCenter
+                alignSelf="stretch"
+                marginLeft={16}
+                borderBottomWidth={0.5}
+                borderColor="lineBreak">
                 <Text flex fontSize={17}>
                   {item.title}
                 </Text>
-                <Icon IconType={FontAwesome5} iconName="chevron-right" iconColor="iconPlaceholder" iconSize={16} />
+                <Icon
+                  IconType={FontAwesome5}
+                  iconName="chevron-right"
+                  iconColor="iconPlaceholder"
+                  iconSize={16}
+                />
               </Block>
             </Pressable>
           );

@@ -9,7 +9,7 @@ import { height, width } from '@responsive';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { useDispatch, useSelector } from 'react-redux';
 import { useFocusEffect } from '@react-navigation/native';
-import actions from '@redux/actions';
+import actions from 'store/actions';
 import Carousel from 'react-native-snap-carousel';
 
 export default function CategoryScreen() {
@@ -34,7 +34,7 @@ export default function CategoryScreen() {
           });
         },
       });
-    }, [dispatch, bigCategories?.data?.length, smallCategories?.data?.length])
+    }, [dispatch, bigCategories?.data?.length, smallCategories?.data?.length]),
   );
 
   return (
@@ -48,7 +48,12 @@ export default function CategoryScreen() {
 const Main = ({ data, loading }) => {
   const { top, bottom } = useSafeAreaInsets();
   return (
-    <Block flex={4} height={height} paddingTop={top + 15} paddingLeft={25} backgroundColor={COLORS.light}>
+    <Block
+      flex={4}
+      height={height}
+      paddingTop={top + 15}
+      paddingLeft={25}
+      backgroundColor={COLORS.light}>
       <Text bold fontSize={25} numberOfLines={2}>
         Select the product you want to buy
       </Text>
@@ -73,7 +78,11 @@ const Main = ({ data, loading }) => {
 const Aside = ({ data, loading }) => {
   const { top, bottom } = useSafeAreaInsets();
   return (
-    <Block width={width / 5} height={height} paddingTop={top + 15} backgroundColor={COLORS.primary}>
+    <Block
+      width={width / 5}
+      height={height}
+      paddingTop={top + 15}
+      backgroundColor={COLORS.primary}>
       <Icon
         flex
         iconSize={35}
@@ -85,15 +94,19 @@ const Aside = ({ data, loading }) => {
       <Block height={height / 1.6} spaceBetween marginBottom={bottom + 100}>
         <ScrollView>
           {data?.map(({ item, index }) => (
-            <Pressable justifyCenter marginVertical={15} height={height / 10} width={'100%'} key={index}>
+            <Pressable
+              justifyCenter
+              marginVertical={15}
+              height={height / 10}
+              width={'100%'}
+              key={index}>
               <Text
                 semiBold
                 fontSize={16}
                 color={COLORS.light}
                 style={{
                   transform: [{ rotateZ: '-90deg' }],
-                }}
-              >
+                }}>
                 phone
               </Text>
             </Pressable>

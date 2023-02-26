@@ -1,7 +1,7 @@
 /** @format */
 
 import React from 'react';
-import actions from '@redux/actions';
+import actions from 'store/actions';
 import { useDispatch, useSelector } from 'react-redux';
 import { Block, HeaderTitle, Image, Text } from '@components';
 import { useBiometrics } from '@hooks';

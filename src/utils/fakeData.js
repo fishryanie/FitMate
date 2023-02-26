@@ -27,7 +27,7 @@ export const LIST_PROFILE = [
   {
     icon: 'pushpino',
     title: 'Địa điểm đã lưu',
-    action: () => drawerRoot.navigate(router.SAVE_LOCATION_SCREEN),
+    action: () => drawerRoot.navigate(router.LOCATION_SAVED_SCREEN),
   },
   {
     icon: 'gift',

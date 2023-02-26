@@ -15,14 +15,15 @@ import router from '@routes/router';
 export default function ModalOption({ open, setOpen, setContinue }) {
   const { bottom } = useSafeAreaInsets();
   const handleSubmit = () => {
-    // setOpen(false);
+    setOpen(false);
 
-    authRoot.navigate(router.REGISTER_SCREEN, {
-      typeSignUp: TYPE_SUBMIT_AUTH.phone,
-    });
-
-    // setOpen(false);
+    setTimeout(() => {
+      return authRoot.navigate(router.REGISTER_SCREEN, {
+        typeSignUp: TYPE_SUBMIT_AUTH.phone,
+      });
+    }, 200);
   };
+
   return (
     <Modal isVisible={open} onBackdropPress={() => setOpen(false)}>
       <Block
@@ -30,8 +31,7 @@ export default function ModalOption({ open, setOpen, setContinue }) {
         overflow="hidden"
         marginBottom={bottom + 15}
         marginHorizontal={15}
-        backgroundColor={COLORS.light}
-      >
+        backgroundColor={COLORS.light}>
         <Block padding={15} backgroundColor={COLORS.bg_bottom}>
           <Text bold center fontSize={SIZES.large}>
             Other Option
@@ -47,8 +47,18 @@ export default function ModalOption({ open, setOpen, setContinue }) {
             onPress={() => setOpen(false)}
           />
         </Block>
-        <TouchableOpacity rowCenter padding={15} borderBottomWidth={1} borderColor={COLORS.background}>
-          <Icon marginRight={10} iconName="logo-google" ICONSize={20} iconColor={COLORS.danger} IconType={Ionicons} />
+        <TouchableOpacity
+          rowCenter
+          padding={15}
+          borderBottomWidth={1}
+          borderColor={COLORS.background}>
+          <Icon
+            marginRight={10}
+            iconName="logo-google"
+            ICONSize={20}
+            iconColor={COLORS.danger}
+            IconType={Ionicons}
+          />
           <Text bold fontSize={SIZES.xMedium}>
             Continue with Google
           </Text>
@@ -71,8 +81,7 @@ export default function ModalOption({ open, setOpen, setContinue }) {
           padding={15}
           borderBottomWidth={1}
           borderColor={COLORS.background}
-          onPress={handleSubmit}
-        >
+          onPress={handleSubmit}>
           <Icon
             marginRight={10}
             iconName="ios-phone-portrait-outline"
