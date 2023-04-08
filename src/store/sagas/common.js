@@ -15,7 +15,7 @@ export const URL_API = {
   },
 
   address: {
-    getLocation: 'getLocation',
+    getLocation: 'app/get-location',
     addSavedLocation: 'addSavedLocation',
     deleteSavedLocation: 'deleteSavedLocation',
     updateSavedLocation: 'updateSavedLocation',

@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "316573005808",
+    "firebase_url": "https://iflex-b0452-default-rtdb.firebaseio.com",
+    "project_id": "iflex-b0452",
+    "storage_bucket": "iflex-b0452.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:316573005808:android:eab7752ecb7e1c87dc4f35",
+        "android_client_info": {
+          "package_name": "com.personal.fitmate"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "316573005808-g8ju8k3ohkf2dpcq04n86m40l0acjrp9.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDoM70-XxD4VK5csg98RvpMM5QCNWKDxYo"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "316573005808-g8ju8k3ohkf2dpcq04n86m40l0acjrp9.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "316573005808-0e9lpoedur1416p3nisljbqv2evlre82.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.personal.iflex"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -2,6 +2,10 @@ package com.iflex;
 
 import com.facebook.react.ReactActivity;
 import com.sensors.RNSensorsPackage;
+import com.reactlibrary.RNMomosdkPackage;
+import com.microsoft.codepush.react.CodePush;
+import org.devio.rn.splashscreen.SplashScreenReactPackage;
+
 public class MainActivity extends ReactActivity {
 
   /**

@@ -15,10 +15,19 @@ import { orderBy } from 'lodash';
 export default function LocationSavedScreen({ route }) {
   const getSavedLocation = useSelector(state => state.getSavedLocation?.data);
 
+  const provinces = useSelector(state => state.getProvince.data || []);
+  const districts = useSelector(state => state.getDistrict.data || []);
+  const wards = useSelector(state => state.getWard.data || []);
+
+  
   const dispatch = useDispatch();
 
   useEffect(() => {
     dispatch({ type: actions.GET_SAVED_LOCATION });
+  }, [dispatch]);
+
+  useEffect(() => {
+    dispatch({ type: actions.GET_PROVINCE, params: { type: 'province' } });
   }, [dispatch]);
 
   useEffect(() => {

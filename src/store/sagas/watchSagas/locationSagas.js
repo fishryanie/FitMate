@@ -159,46 +159,12 @@ function* getCountry(action) {
   }
 }
 
-function* getProvince(action) {
+function* getLocation(action) {
   try {
-    const res = yield api.get(URL_API.address.getLocation, { type: 'province' });
+    const res = yield api.get(URL_API.address.getLocation, action.params);
     yield put({
       type: _onSuccess(action.type),
       data: res.data?.map(item => ({
-        value: item.code,
-        label: item.title,
-      })),
-    });
-    action.onSuccess?.(res.data);
-  } catch (error) {
-    action.onFail?.();
-    yield put({ type: _onFail(action.type) });
-  }
-}
-
-function* getDistrict(action) {
-  try {
-    const res = yield api.get(URL_API.address.getLocation, action.params);
-    yield put({
-      type: _onSuccess(action.type),
-      data: res.data?.map((item, index) => ({
-        value: item.code,
-        label: item.title,
-      })),
-    });
-    action.onSuccess?.(res.data);
-  } catch (error) {
-    action.onFail?.();
-    yield put({ type: _onFail(action.type) });
-  }
-}
-
-function* getWard(action) {
-  try {
-    const res = yield api.get(URL_API.address.getLocation, action.params);
-    yield put({
-      type: _onSuccess(action.type),
-      data: res.data?.map((item, index) => ({
         value: item.code,
         label: item.title,
       })),
@@ -307,9 +273,9 @@ export function* watchLocationSagas() {
   yield takeLatest(actions.GM_AUTOCOMPLETE, gmAutoComplete);
   // //server
   yield takeLatest(actions.GET_COUNTRY, getCountry);
-  yield takeLatest(actions.GET_PROVINCE, getProvince);
-  yield takeLatest(actions.GET_DISTRICT, getDistrict);
-  yield takeLatest(actions.GET_WARD, getWard);
+  yield takeLatest(actions.GET_PROVINCE, getLocation);
+  yield takeLatest(actions.GET_DISTRICT, getLocation);
+  yield takeLatest(actions.GET_WARD, getLocation);
   yield takeLatest(actions.GET_SAVED_LOCATION_TYPE, getSavedLocationType);
   yield takeLatest(actions.GET_SAVED_LOCATION, getSavedLocation);
   yield takeLatest(actions.ADD_SAVED_LOCATION, addSavedLocation);
