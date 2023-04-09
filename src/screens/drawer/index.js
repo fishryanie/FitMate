@@ -7,6 +7,7 @@ import ShopFormProductScreen from './ProductManagementScreen/ShopFormProductScre
 import AccountInfoScreen from './AccountInfoScreen';
 import LocationSavedScreen from './LocationSavedScreen';
 import LocationFormScreen from './LocationFormScreen';
+import ChangePwdScreen from './ChangPwdScreen';
 
 export const drawer = {
   [router.SETTING_SCREEN]: SettingScreen,
@@ -19,7 +20,7 @@ export const drawer = {
 
   [router.ORDER_HISTORY_SCREEN]: ProductManagementScreen,
   [router.ACCOUNT_INTRO_SCREEN]: AccountInfoScreen,
-  [router.CHANGE_PASSWORD_SCREEN]: ProductManagementScreen,
+  [router.CHANGE_PASSWORD_SCREEN]: ChangePwdScreen,
   [router.REVENUE_STATISTICS_SCREEN]: ProductManagementScreen,
   [router.PRODUCT_MANAGEMENT_SCREEN]: ProductManagementScreen,
 };

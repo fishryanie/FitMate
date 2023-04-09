@@ -4,15 +4,12 @@ import axios from 'axios';
 import { store } from '@store';
 import { handleExpiredToken, throttle } from './helper';
 
-// axios.defaults.baseURL = 'https://iflex.onrender.com/api/v1/';
-axios.defaults.baseURL = 'http:192.168.1.14:8000/api/v1';
+axios.defaults.baseURL = 'https://iflex.onrender.com/api/v1/';
+// axios.defaults.baseURL = 'http:192.168.1.14:8000/api/v1';
 
 const getDataBody = config => {
   let data = '';
-  if (
-    config.data &&
-    config.headers['Content-Type'] === 'application/x-www-form-urlencoded'
-  ) {
+  if (config.data && config.headers['Content-Type'] === 'application/x-www-form-urlencoded') {
     for (const key in config.data) {
       data = data + `${key}=${config.data[key]}&`;
     }
@@ -31,15 +28,11 @@ axios.interceptors.request.use(
   config => {
     const data = getDataBody(config);
     if (__DEV__ && config.url) {
-      console.log(
-        `%c [REQUEST] ${config?.url}`,
-        'color: #458B00; font-weight: bold',
-        config,
-      );
-      console.log('url:', config.url);
-      console.log('method:', config.method);
-      console.log('data:', config.data);
-      console.log('params:', config.params);
+      console.log(`%c [REQUEST] ${config?.url}`, 'color: #458B00; font-weight: bold', config);
+      // console.log('url:', config.url);
+      // console.log('method:', config.method);
+      // console.log('data:', config.data);
+      // console.log('params:', config.params);
     }
 
     return { ...config, data };
@@ -53,11 +46,7 @@ axios.interceptors.request.use(
 axios.interceptors.response.use(
   response => {
     if (__DEV__ && response.config.url) {
-      console.log(
-        `%c [RESPONSE] ${response.config.url}`,
-        'color: #CD950C; font-weight: bold',
-        response,
-      );
+      console.log(`%c [RESPONSE] ${response.config.url}`, 'color: #CD950C; font-weight: bold', response);
       console.log('status:', response.status);
       console.log('data:', response.data);
     }

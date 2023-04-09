@@ -20,7 +20,6 @@ export default function MainContainer() {
   useBackgroundMessages();
   useNotificationPermission();
   const dispatch = useDispatch();
-  const message = useFCMMessage();
 
   const appLanguage = useSelector(state => state.app.lang);
   const accessToken = useSelector(state => state.user.accessToken);
@@ -32,12 +31,6 @@ export default function MainContainer() {
   useEffect(() => {
     dispatch({ type: actions.GET_CONFIGS_APP, params: { type: 'terms-policy' } });
   }, [dispatch]);
-
-  useEffect(() => {
-    if (accessToken) {
-      dispatch({ type: actions.GET_ONE_USER });
-    }
-  }, [dispatch, accessToken]);
 
   return (
     <NavigationContainer ref={navigationRef}>

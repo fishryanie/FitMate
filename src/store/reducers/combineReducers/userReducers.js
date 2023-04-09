@@ -111,7 +111,7 @@ export const login = (...props) => {
 // };
 
 export const getOneUser = (...props) => {
-  return reducerDefault(...props, actions.GET_ONE_USER);
+  return reducerDefault(...props, actions.GET_USER);
 };
 
 // export const updateAvatar = (...props) => {

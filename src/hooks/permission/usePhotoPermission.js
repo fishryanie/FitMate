@@ -1,7 +1,9 @@
-import {checkAndRequestPermission} from '@utils/helper';
-import {useEffect, useState} from 'react';
-import {Platform} from 'react-native';
-import {PERMISSIONS} from 'react-native-permissions';
+/** @format */
+
+import { checkAndRequestPermission } from '@utils/helper';
+import { useEffect, useState } from 'react';
+import { Platform } from 'react-native';
+import { PERMISSIONS } from 'react-native-permissions';
 
 export default function usePhotoPermission() {
   const [permit, setPermited] = useState(false);

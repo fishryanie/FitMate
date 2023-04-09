@@ -19,7 +19,6 @@ export default function LocationSavedScreen({ route }) {
   const districts = useSelector(state => state.getDistrict.data || []);
   const wards = useSelector(state => state.getWard.data || []);
 
-  
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -57,7 +56,7 @@ export default function LocationSavedScreen({ route }) {
           />
         }
         rightOnPress={() => {
-          commonRoot.navigate(router.LOCATION_FORM_SCREEN, {
+          commonRoot.navigate(router.MAP_SELECT_SCREEN, {
             title: 'Chỉnh sửa vị trí',
           });
         }}

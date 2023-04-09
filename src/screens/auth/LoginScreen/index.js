@@ -38,12 +38,7 @@ export default function LoginScreen() {
   const dispatch = useDispatch();
 
   const handlePress = () => {
-    if (
-      savedUsername === '' &&
-      savedPassword === '' &&
-      !isActiveBiometrics &&
-      !showFormLogin
-    ) {
+    if (savedUsername === '' && savedPassword === '' && !isActiveBiometrics && !showFormLogin) {
       setShowFormLogin(true);
     } else {
       onSubmit();
@@ -122,14 +117,7 @@ export default function LoginScreen() {
           onPress={value => dispatch({ type: actions.CHANGE_LANGUAGE, value })}
         />
       </Block>
-      <Text
-        flex={1.5}
-        bold
-        justifyCenter
-        numberOfLines={2}
-        paddingLeft={15}
-        fontSize={55}
-        color={COLORS.dark}>
+      <Text flex={1.5} bold justifyCenter numberOfLines={2} paddingLeft={15} fontSize={55} color={COLORS.dark}>
         {t('Login.title')}
       </Text>
 
@@ -144,32 +132,18 @@ export default function LoginScreen() {
             onPress={handlePress}
           />
           {isShowBiometrics && account.isActiveBiometrics && (
-            <Pressable
-              square={50}
-              padding={10}
-              radius={15}
-              marginLeft={10}
-              backgroundColor={COLORS.dark}>
+            <Pressable square={50} padding={10} radius={15} marginLeft={10} backgroundColor={COLORS.dark}>
               <Image square="100%" source={ICONS.ic_faceId} />
             </Pressable>
           )}
         </Block>
-        <Text
-          center
-          medium
-          color={COLORS.textPlaceholder}
-          marginVertical={15}
-          onPress={() => setOpenOption(true)}>
+        <Text center medium color={COLORS.textPlaceholder} marginVertical={15} onPress={() => setOpenOption(true)}>
           {t('Login.otherOption')}
         </Text>
       </Block>
       {/* <Button title="Continue with Facebook" iconLeft={<Icon marginRight={10} iconName="facebook" ICONSize={20} iconColor={COLORS.light} IconType={MaterialICONS} />} />
       <Button title="Continue with Google" iconLeft={<Icon marginRight={10} iconName="logo-google" ICONSize={20} iconColor={COLORS.light} IconType={IonICONS} />} /> */}
-      <ModalOption
-        open={openOption}
-        setOpen={setOpenOption}
-        setContinue={setOpenReferralCode}
-      />
+      <ModalOption open={openOption} setOpen={setOpenOption} setContinue={setOpenReferralCode} />
       <ModalReferralCode open={openReferralCode} setOpen={setOpenReferralCode} />
     </Block>
   );

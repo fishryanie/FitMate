@@ -7,16 +7,7 @@ import Feather from 'react-native-vector-icons/Feather';
 import AntDesign from 'react-native-vector-icons/AntDesign';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import {
-  Block,
-  Icon,
-  Image,
-  ListWrapper,
-  PopupAccept,
-  Pressable,
-  Text,
-  TouchableOpacity,
-} from '@components';
+import { Block, Icon, Image, ListWrapper, PopupAccept, Pressable, Text, TouchableOpacity } from '@components';
 import { Animated, StyleSheet } from 'react-native';
 import { bottom } from '@screens/bottom';
 import { hs, vs, width } from '@responsive';
@@ -43,7 +34,7 @@ export default function BottomContainer() {
   const handleLogOut = () => {
     dispatch({ type: actions.LOGOUT_APP });
     dispatch({ type: actions.TOGGLE_DRAWER });
-    dispatch({ type: _onUnmount(actions.GET_ONE_USER) });
+    dispatch({ type: _onUnmount(actions.GET_USER) });
     Toast.show({ type: 'success', text1: 'Logout success' });
   };
 
@@ -162,13 +153,7 @@ export default function BottomContainer() {
         backgroundColor={COLORS.light}
         borderBottomRightRadius={107 / 2}
         onPress={() => dispatch({ type: actions.TOGGLE_DRAWER })}>
-        <Image
-          radius={15}
-          square={45}
-          source={IMAGES.avatar}
-          marginRight={10}
-          resizeMode="cover"
-        />
+        <Image radius={15} square={45} source={IMAGES.avatar} marginRight={10} resizeMode="cover" />
         <Block flex>
           <Text regular fontSize={12} lineHeight={25} color={COLORS.dark}>
             Xin chào!
@@ -234,26 +219,11 @@ export default function BottomContainer() {
           backBehavior="initialRoute"
           screenOptions={screenOptions}
           initialRouteName={router.HOME_SCREEN}>
-          <Bottom.Screen
-            name={router.HOME_SCREEN}
-            component={bottom[router.HOME_SCREEN]}
-          />
-          <Bottom.Screen
-            name={router.SHOP_SCREEN}
-            component={bottom[router.SHOP_SCREEN]}
-          />
-          <Bottom.Screen
-            name={router.SCAN_SCREEN}
-            component={bottom[router.SCAN_SCREEN]}
-          />
-          <Bottom.Screen
-            name={router.PLAN_SCREEN}
-            component={bottom[router.PLAN_SCREEN]}
-          />
-          <Bottom.Screen
-            name={router.PROFILE_SCREEN}
-            component={bottom[router.PROFILE_SCREEN]}
-          />
+          <Bottom.Screen name={router.HOME_SCREEN} component={bottom[router.HOME_SCREEN]} />
+          <Bottom.Screen name={router.SHOP_SCREEN} component={bottom[router.SHOP_SCREEN]} />
+          <Bottom.Screen name={router.SCAN_SCREEN} component={bottom[router.SCAN_SCREEN]} />
+          <Bottom.Screen name={router.PLAN_SCREEN} component={bottom[router.PLAN_SCREEN]} />
+          <Bottom.Screen name={router.PROFILE_SCREEN} component={bottom[router.PROFILE_SCREEN]} />
         </Bottom.Navigator>
       </Animated.View>
     </Block>

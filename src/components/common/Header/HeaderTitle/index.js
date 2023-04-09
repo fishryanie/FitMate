@@ -23,8 +23,11 @@ export default function HeaderTitle({
   titleProps,
   IconRight,
   rightOnPress,
+  leftStyle,
+  rightStyle,
   barStyle,
   searchInput,
+
   ...props
 }) {
   const _renderIconBack = opacity => {
@@ -36,7 +39,7 @@ export default function HeaderTitle({
 
     return (
       (canGoBack || onGoBack) && (
-        <TouchableOpacity opacity={opacity} onPress={_onGoBack}>
+        <TouchableOpacity opacity={opacity} onPress={_onGoBack} {...leftStyle}>
           <Icon IconType={AntDesign} iconName="arrowleft" iconSize={25} color={color} />
         </TouchableOpacity>
       )
@@ -45,7 +48,10 @@ export default function HeaderTitle({
 
   const _renderIconRight = () => {
     return IconRight ? (
-      <TouchableOpacity onPress={rightOnPress} paddingHorizontal={SIZES.xSmall}>
+      <TouchableOpacity
+        onPress={rightOnPress}
+        paddingHorizontal={SIZES.xSmall}
+        {...rightStyle}>
         {IconRight}
       </TouchableOpacity>
     ) : (

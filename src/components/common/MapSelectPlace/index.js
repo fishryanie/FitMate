@@ -1,29 +1,23 @@
-import {icons} from '@assets';
-import {
-  Block,
-  Icon,
-  Image,
-  LiveMarker,
-  Modal,
-  Pressable,
-  Text,
-} from '@components';
-import {DEFAULT_MAP_DELTA, HO_CHI_MINH_CITY_REGION} from '@constants';
+/** @format */
+
+import { icons } from '@assets';
+import { Block, Icon, Image, LiveMarker, Modal, Pressable, Text } from '@components';
+import { DEFAULT_MAP_DELTA, HO_CHI_MINH_CITY_REGION } from '@constants';
 import actions from '@redux/actions';
-import {COLORS} from '@theme';
-import React, {useEffect, useMemo, useRef, useState} from 'react';
-import {Dimensions, Platform, StatusBar} from 'react-native';
-import MapView, {Marker} from 'react-native-maps';
-import {useSafeAreaInsets} from 'react-native-safe-area-context';
+import { COLORS } from '@theme';
+import React, { useEffect, useMemo, useRef, useState } from 'react';
+import { Dimensions, Platform, StatusBar } from 'react-native';
+import MapView, { Marker } from 'react-native-maps';
+import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
-import {useDispatch, useSelector} from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 
-const {width, height} = Dimensions.get('window');
+const { width, height } = Dimensions.get('window');
 const PIN_WIDTH = 33;
 const PIN_HEIGHT = 56;
 
-const MapSelectPlace = ({placeOnConfirm, backOnPress, latLng}) => {
+const MapSelectPlace = ({ placeOnConfirm, backOnPress, latLng }) => {
   const myCoordUser =
     useSelector(state => state.userLocation.data) || HO_CHI_MINH_CITY_REGION;
 
@@ -33,7 +27,7 @@ const MapSelectPlace = ({placeOnConfirm, backOnPress, latLng}) => {
   const [isAnimating, setIsAnimating] = useState(false);
   const mapViewRef = useRef(null);
   const dispatch = useDispatch();
-  const {top, bottom} = useSafeAreaInsets();
+  const { top, bottom } = useSafeAreaInsets();
   const geocoding = useSelector(state => state.geocoding);
 
   useEffect(() => {
@@ -115,11 +109,7 @@ const MapSelectPlace = ({placeOnConfirm, backOnPress, latLng}) => {
 
   const _renderConfirmAddress = () => {
     return (
-      <Block
-        backgroundColor="white"
-        radius={10}
-        shadow3
-        paddingBottom={bottom + 15}>
+      <Block backgroundColor="white" radius={10} shadow3 paddingBottom={bottom + 15}>
         {geocoding.data && !geocoding.isLoading && !isAnimating && (
           <>
             <Block
@@ -163,8 +153,8 @@ const MapSelectPlace = ({placeOnConfirm, backOnPress, latLng}) => {
           onRegionChangeComplete={onRegionChangeComplete}
           ref={mapViewRef}
           // provider={PROVIDER_GOOGLE}
-          initialRegion={{...DEFAULT_MAP_DELTA, ...myCoord}}
-          style={{flex: 1}}>
+          initialRegion={{ ...DEFAULT_MAP_DELTA, ...myCoord }}
+          style={{ flex: 1 }}>
           <Marker coordinate={myCoord}>
             <LiveMarker />
           </Marker>

@@ -22,7 +22,7 @@ export default function useBackgroundMessages() {
     if (appState === 'active') {
       handleDefaultMessage();
       if (accessToken) {
-        dispatch({ type: actions.GET_USER_INFORMATION });
+        dispatch({ type: actions.GET_USER });
       }
     }
   }, [dispatch, accessToken, appState]);

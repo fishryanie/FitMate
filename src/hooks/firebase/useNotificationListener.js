@@ -72,7 +72,7 @@ export default function useNotificationListener() {
       }
       displayNotification(message);
       getDataMessage(message);
-      dispatch({ type: actions.GET_ONE_USER });
+      dispatch({ type: actions.GET_USER });
       dispatch({ type: actions.SAVE_FCM_MESSAGE, data: message });
     });
     return onMessageListener;

@@ -11,15 +11,11 @@ import { commonRoot } from '@routes/Ref';
 import router from '@routes/router';
 import { useDispatch } from 'react-redux';
 import actions from 'store/actions';
-import { useEffect } from 'react';
 import { useSelector } from 'react-redux';
 
 export default function HomeScreen() {
   const dispatch = useDispatch();
   const infoUser = useSelector(state => state.getOneUser?.data);
-  useEffect(() => {
-    dispatch({ type: actions.GET_ONE_USER });
-  }, [dispatch]);
   const { top } = useSafeAreaInsets();
 
   function redirectCart() {
@@ -64,13 +60,7 @@ const Banner = () => (
       <Block flex>
         <Block rowCenter>
           <Block alignCenter justifyCenter>
-            <Image
-              alignSelfCenter
-              square={15}
-              margin={5}
-              source={ICONS.fire}
-              resizeMode="contain"
-            />
+            <Image alignSelfCenter square={15} margin={5} source={ICONS.fire} resizeMode="contain" />
           </Block>
           <Text small color={COLORS.light}>
             limited offer
@@ -105,13 +95,7 @@ const VideoPlay = () => (
           marginLeft={index === 0 ? 15 : 0}
           marginRight={15}
           marginVertical={15}>
-          <Image
-            height={150}
-            width={'100%'}
-            borderTopRadius={15}
-            source={IMAGES.couple}
-            resizeMode="cover"
-          />
+          <Image height={150} width={'100%'} borderTopRadius={15} source={IMAGES.couple} resizeMode="cover" />
           <Block padding={10}>
             <Text regular sizeMedium>
               2 Hour Bulking Trainer
@@ -125,13 +109,7 @@ const VideoPlay = () => (
                 45 Min
               </Text>
             </Block>
-            <Block
-              absolute
-              top={-15}
-              right={25}
-              radius={15}
-              padding={10}
-              backgroundColor={COLORS.primary}>
+            <Block absolute top={-15} right={25} radius={15} padding={10} backgroundColor={COLORS.primary}>
               <Image square={10} source={ICONS.play} />
             </Block>
           </Block>

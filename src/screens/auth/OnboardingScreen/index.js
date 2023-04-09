@@ -62,9 +62,7 @@ const OnboardingScreen = ({ navigation }) => {
       />
       <Block bottom={vs(50)} backgroundColor={'white'} style={{ width: '100%' }}>
         <Dot data={dataImage} scrollX={scrollX} key={item => item.img_link} />
-        <ButtonSubmit
-          onPress={() => navigate(router.AUTH_CONTAINER)}
-          paddingVertical={12}>
+        <ButtonSubmit onPress={() => navigate(router.AUTH_CONTAINER)} paddingVertical={12}>
           {'Tiếp tục'}
         </ButtonSubmit>
       </Block>

@@ -22,11 +22,18 @@ export default function CommonContainer() {
         name={router.PRODUCT_DETAIL_SCREEN}
         component={common[router.PRODUCT_DETAIL_SCREEN]}
       />
-
-      {/* <CommonStack.Screen
-        name={router.STORE_CHECKIN_HISTORY_SCREEN}
-        component={common[router.STORE_CHECKIN_HISTORY_SCREEN]}
-      /> */}
+      <CommonStack.Screen
+        name={router.PAYMENT_METHODS_SCREEN}
+        component={common[router.PAYMENT_METHODS_SCREEN]}
+      />
+      <CommonStack.Screen
+        name={router.MAP_SELECT_SCREEN}
+        component={common[router.MAP_SELECT_SCREEN]}
+      />
+      <CommonStack.Screen
+        name={router.LOCATION_SELECT_SCREEN}
+        component={common[router.LOCATION_SELECT_SCREEN]}
+      />
     </CommonStack.Navigator>
   );
 }

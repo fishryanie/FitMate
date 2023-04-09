@@ -74,10 +74,7 @@ const HeaderSearch = ({
 
   return (
     <Block>
-      <StatusBar
-        backgroundColor={backgroundColor ? backgroundColor : 'primary'}
-        barStyle={barStyle}
-      />
+      <StatusBar backgroundColor={backgroundColor ? backgroundColor : 'primary'} barStyle={barStyle} />
       <Block
         row
         alignCenter
@@ -95,12 +92,7 @@ const HeaderSearch = ({
           backgroundColor={'white'}>
           {textSearch.length <= 0 && (
             <Block width={40} height={45} justifyCenter alignCenter>
-              <Icon
-                IconType={AntDesign}
-                iconName="search1"
-                iconColor={COLORS.gray}
-                ICONSize={20}
-              />
+              <Icon IconType={AntDesign} iconName="search1" iconColor={COLORS.gray} ICONSize={20} />
             </Block>
           )}
 

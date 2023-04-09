@@ -44,15 +44,15 @@ export const HISTORY_STATUS = {
   fail: '2',
 };
 
+export const DEFAULT_MAP_DELTA = {
+  latitudeDelta: 0.005,
+  longitudeDelta: 0.005,
+};
+
 export const HO_CHI_MINH_CITY_REGION = {
   latitude: 10.762622,
   longitude: 106.660172,
   ...DEFAULT_MAP_DELTA,
-};
-
-export const DEFAULT_MAP_DELTA = {
-  latitudeDelta: 0.005,
-  longitudeDelta: 0.005,
 };
 
 export const APP_LANGUAGE = {

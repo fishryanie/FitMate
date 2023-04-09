@@ -14,7 +14,7 @@ export default function BottomButton({
   loading = false,
   color = COLORS.light,
   backgroundColor = COLORS.primary,
-  topContent,
+  children,
   ...containerProps
 }) {
   const { bottom } = useSafeAreaInsets();
@@ -28,9 +28,8 @@ export default function BottomButton({
       width={width}
       alignSelfCenter
       paddingBottom={bottom === 0 ? 10 : bottom}
-      backgroundColor={COLORS.light}
-    >
-      {topContent && topContent}
+      backgroundColor={COLORS.light}>
+      {children}
       <Pressable
         flex
         justifyCenter
@@ -40,8 +39,7 @@ export default function BottomButton({
         onPress={onPress}
         backgroundColor={backgroundColor}
         disabled={loading || disabled}
-        {...containerProps}
-      >
+        {...containerProps}>
         {loading ? (
           <ActivityIndicator size="small" color={color} />
         ) : (

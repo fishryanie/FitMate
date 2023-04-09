@@ -158,7 +158,7 @@ function* updatePass(action) {
 
 export function* watchUserSagas() {
   yield takeLatest(actions.LOGIN_APP, login);
-  yield takeLatest(actions.GET_ONE_USER, getOneUser);
+  yield takeLatest(actions.GET_USER, getOneUser);
   // yield takeLatest(actions.UPDATE_AVATAR, updateAvatar);
   yield takeLatest(actions.UPDATE_ONE_USER, updateOneUser);
   // yield takeLatest(actions.UPDATE_PASS, updatePass);

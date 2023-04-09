@@ -31,6 +31,7 @@ import HeaderSearch from './common/Header/HeaderSearch';
 
 //common
 import NetWork from './common/NetWork';
+import LiveMarker from './common/LiveMarker';
 import PopupAccept from './popup/PopupAccept';
 import BottomButton from './common/BottomButton';
 
@@ -62,6 +63,7 @@ export {
 
   //common
   NetWork,
+  LiveMarker,
   PopupAccept,
   BottomButton,
 
