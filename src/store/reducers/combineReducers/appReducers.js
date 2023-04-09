@@ -7,6 +7,7 @@ const initialState = {
   data: null,
   isDrawer: false,
   isLoading: false,
+  fcmMessage: null,
   isFirstOpenApp: true,
   isActiveBiometrics: false,
   lang: APP_LANGUAGE.vietnamese,

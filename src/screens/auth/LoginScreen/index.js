@@ -26,12 +26,10 @@ export default function LoginScreen() {
   const deviceName = useDeviceName();
 
   const account = useSelector(state => state.user);
-  console.log('🚀 ~ file: index.js:29 ~ LoginScreen ~ account:', account);
   const isLoading = useSelector(state => state.login.isLoading);
   const savedUsername = useSelector(state => state.user.username);
   const savedPassword = useSelector(state => state.user.password);
   const isActiveBiometrics = useSelector(state => state.app.isActiveBiometrics);
-  console.log("🚀 ~ file: index.js:48 ~ handlePress ~ isActiveBiometrics:", isActiveBiometrics)
 
   const [openOption, setOpenOption] = useState(false);
   const [showFormLogin, setShowFormLogin] = useState(false);

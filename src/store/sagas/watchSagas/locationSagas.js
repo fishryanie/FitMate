@@ -20,11 +20,7 @@ instance.interceptors.request.use(
       ...config.params,
     };
     if (__DEV__) {
-      console.log(
-        `%c [REQUEST] ${config?.url}`,
-        'color: #458B00; font-weight: bold',
-        config,
-      );
+      console.log(`%c [REQUEST] ${config?.url}`, 'color: #458B00; font-weight: bold', config);
     }
     return config;
   },
@@ -36,11 +32,7 @@ instance.interceptors.request.use(
 instance.interceptors.response.use(
   response => {
     if (__DEV__) {
-      console.log(
-        `%c [RESPONSE] ${response.config.url}`,
-        'color: #CD950C; font-weight: bold',
-        response,
-      );
+      console.log(`%c [RESPONSE] ${response.config.url}`, 'color: #CD950C; font-weight: bold', response);
     }
     return response;
   },
@@ -128,8 +120,7 @@ function* gmAutoComplete(payload) {
         data.forEach((d, i) => {
           const geometry = result[i].detail.data.result.geometry;
           d.geometry = geometry;
-          d.distanceToUser =
-            (result[i].direction.data.routes[0].legs[0].distance.value || 0) / 1000;
+          d.distanceToUser = (result[i].direction.data.routes[0].legs[0].distance.value || 0) / 1000;
         });
         data.sort((a, b) => a.distanceToUser - b.distanceToUser);
       }

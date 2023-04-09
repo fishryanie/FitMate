@@ -31,7 +31,7 @@ import HeaderSearch from './common/Header/HeaderSearch';
 
 //common
 import NetWork from './common/NetWork';
-import PopupAccept from './common/PopupAccept';
+import PopupAccept from './popup/PopupAccept';
 import BottomButton from './common/BottomButton';
 
 export {

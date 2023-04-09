@@ -12,6 +12,7 @@ import moment from 'moment';
 import { Alert } from 'react-native';
 import DeviceInfo from 'react-native-device-info';
 import RNRestart from 'react-native-restart';
+import remoteConfig from '@react-native-firebase/remote-config';
 import { check, request, RESULTS } from 'react-native-permissions';
 
 export const randomNumberString = () => {
@@ -220,10 +221,7 @@ export function getDistanceFromLatLng(lat1, lon1, lat2, lon2) {
   //const p = 0.017453292519943295; // Math.PI / 180
   const p = Math.PI / 180;
   const c = Math.cos;
-  const a =
-    0.5 -
-    c((lat2 - lat1) * p) / 2 +
-    (c(lat1 * p) * c(lat2 * p) * (1 - c((lon2 - lon1) * p))) / 2;
+  const a = 0.5 - c((lat2 - lat1) * p) / 2 + (c(lat1 * p) * c(lat2 * p) * (1 - c((lon2 - lon1) * p))) / 2;
   return 12742 * Math.asin(Math.sqrt(a)); // 2 * R; R = 6371 km
 }
 
@@ -287,10 +285,7 @@ export const decodePolyline = encoded => {
   return poly;
 };
 
-export const tryParseNumber = (
-  number,
-  { fallback = 0, isFloat = false, radix = 10 } = {},
-) => {
+export const tryParseNumber = (number, { fallback = 0, isFloat = false, radix = 10 } = {}) => {
   const result = isFloat ? parseFloat(number) : parseInt(number, radix);
   if (isNaN(result)) {
     return fallback;
@@ -327,4 +322,42 @@ export const convertOption = (arr_option_tmp, option1, option2, option3) => {
     const checkOption3 = value.Option3 === option3;
     return checkOption1 && checkOption2 && checkOption3;
   });
+};
+
+export const isNewerVersion = (oldVer, newVer) => {
+  const oldParts = oldVer?.split('.');
+  const newParts = newVer?.split('.');
+  for (let i = 0; i < newParts?.length; i++) {
+    const a = +newParts[i] || 0;
+    const b = +oldParts[i] || 0;
+    if (a > b) {
+      return true;
+    }
+    if (a < b) {
+      return false;
+    }
+  }
+  return false;
+};
+
+export const setupRemoteConfig = async () => {
+  const DEFAULT_VALUE = {
+    ios_up_store: true,
+    current_version_store: '',
+  };
+  await remoteConfig().setDefaults(DEFAULT_VALUE);
+  await remoteConfig().setConfigSettings({
+    minimumFetchIntervalMillis: 5 * 60 * 1000,
+  });
+  await remoteConfig().fetchAndActivate();
+};
+
+export const convertMinutesToHours = minutes => {
+  if (minutes >= 60) {
+    const hours = Math.floor(minutes / 60);
+    const remainingMinutes = minutes % 60;
+    return `${hours} giờ ${remainingMinutes} phút`;
+  } else {
+    return `${minutes} phút`;
+  }
 };

@@ -28,22 +28,38 @@
 		<string>Quicksand-Regular.ttf</string>
 		<string>Quicksand-SemiBold.ttf</string>
 	</array>
+	<key>CodePushDeploymentKey</key>
+	<string>$(CODEPUSH_KEY)</string>
 	<key>NSCameraUsageDescription</key>
 	<string>Cho phép ${PRODUCT_NAME} sử dụng máy ảnh để thay đổi ảnh đại diện</string>
 	<key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
-	<string>Cho phép ${PRODUCT_NAME} sử dụng địa điểm của bạn để thông báo tới đối tác tham gia chuyến đi</string>
+	<string>Cho phép ${PRODUCT_NAME} sử dụng địa điểm của bạn</string>
 	<key>NSLocationAlwaysUsageDescription</key>
-	<string>Cho phép ${PRODUCT_NAME} sử dụng địa điểm của bạn để thông báo tới đối tác tham gia chuyến đi</string>
+	<string>Cho phép ${PRODUCT_NAME} sử dụng địa điểm của bạn</string>
 	<key>NSLocationWhenInUseUsageDescription</key>
-	<string/>
+	<string>Cho phép ${PRODUCT_NAME} sử dụng địa điểm của bạn</string>
 	<key>NSMicrophoneUsageDescription</key>
-	<string>Cho phép ${PRODUCT_NAME} sử dụng microphone để thực hiện cuộc gọi đến đối tác</string>
+	<string>Cho phép ${PRODUCT_NAME} sử dụng microphone để thực hiện cuộc gọi</string>
 	<key>NSPhotoLibraryUsageDescription</key>
-	<string>Cho phép ${PRODUCT_NAME} truy cập hình ảnh của bạn để thay đổi ảnh đại diện</string>
+	<string>Cho phép ${PRODUCT_NAME} truy cập hình ảnh của bạn</string>
+	<key>NSFaceIDUsageDescription</key>
+	<string>$(PRODUCT_NAME) Authentication with TouchId or FaceID</string>
+	<key>UIBackgroundModes</key>
+	<array>
+		<string>fetch</string>
+		<string>location</string>
+		<string>remote-notification</string>
+	</array>
+	<key>LSApplicationQueriesSchemes</key>
+	<array>
+		<string>tel</string>
+		<string>sms</string>
+		<string>momo</string>
+	</array>
 	<key>CFBundleDevelopmentRegion</key>
 	<string>en</string>
 	<key>CFBundleDisplayName</key>
-	<string>iflex</string>
+	<string>FitMate</string>
 	<key>CFBundleExecutable</key>
 	<string>$(EXECUTABLE_NAME)</string>
 	<key>CFBundleIdentifier</key>

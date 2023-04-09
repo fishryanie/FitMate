@@ -1,5 +1,5 @@
 {
-  "name": "FitMate",
+  "name": "fitmate",
   "version": "0.0.1",
   "private": true,
   "scripts": {
@@ -18,10 +18,10 @@
     "start": "react-native start",
     "test": "jest",
     "lint": "eslint .",
-    "codepush:ios": "appcenter codepush release-react -a imsgroup/SGO -d Production -m",
-    "codepush:android": "appcenter codepush release-react -a imsgroup/SGO_ANDROID -d Production -m",
-    "codepush-key:ios": "appcenter codepush deployment list -a imsgroup/SGO -k",
-    "codepush-key:android": "appcenter codepush deployment list -a imsgroup/SGO_ANDROID -k"
+    "codepush:ios": "appcenter codepush release-react -a Hồng Quân Phan/FitMate-IOS -d Production -m",
+    "codepush:android": "appcenter codepush release-react -a Hồng Quân Phan/FitMate-Android -d Production -m",
+    "codepush-key:ios": "appcenter codepush deployment list -a Hồng Quân Phan/FitMate-IOS -k",
+    "codepush-key:android": "appcenter codepush deployment list -a Hồng Quân Phan/FitMate-Android -k"
   },
   "dependencies": {
     "@hookform/resolvers": "^2.8.5",
@@ -32,12 +32,13 @@
     "@react-native-community/hooks": "^2.8.1",
     "@react-native-community/netinfo": "^7.1.6",
     "@react-native-community/push-notification-ios": "^1.10.1",
-    "@react-native-firebase/analytics": "^14.5.0",
-    "@react-native-firebase/app": "14.2.2",
-    "@react-native-firebase/auth": "14.2.2",
-    "@react-native-firebase/database": "^14.3.1",
+    "@react-native-firebase/analytics": "^14.2.2",
+    "@react-native-firebase/app": "^14.2.2",
+    "@react-native-firebase/database": "^14.2.2",
+    "@react-native-firebase/dynamic-links": "^14.2.2",
     "@react-native-firebase/firestore": "^14.2.2",
-    "@react-native-firebase/messaging": "14.2.2",
+    "@react-native-firebase/messaging": "^14.2.2",
+    "@react-native-firebase/remote-config": "^14.2.2",
     "@react-native-google-signin/google-signin": "^9.0.2",
     "@react-navigation/bottom-tabs": "^6.0.9",
     "@react-navigation/material-top-tabs": "^6.5.1",

@@ -1,7 +1,6 @@
 /** @format */
 
-import { ICONS } from '@assets';
-// import {CustomToast} from '@utils/';
+import { icons } from '@assets';
 import { useEffect, useState } from 'react';
 import ReactNativeBiometrics, { BiometryTypes } from 'react-native-biometrics';
 
@@ -18,33 +17,37 @@ export default function useBiometrics() {
   const [iconBiometrics, setIconBiometrics] = useState(null);
   const [isShowBiometrics, setIsShowBiometrics] = useState(true);
   const [isSupportedBiometrics, setIsSupportedBiometrics] = useState(null);
+  const [describeBiometrics, setDescribeBiometrics] = useState('');
 
   useEffect(() => {
     rnBiometrics.isSensorAvailable();
     rnBiometrics.isSensorAvailable().then(resultObject => {
       const { available, biometryType } = resultObject;
       if (available && biometryType === BiometryTypes.TouchID) {
-        setIconBiometrics(ICONS.ic_fingerprint);
+        setIconBiometrics(icons.ic_fingerprint);
+        setDescribeBiometrics('Dùng cảm biến vân tay của người dùng');
         setIsSupportedBiometrics(TYPE_SUPPORT_BIOMETRIC.TouchID);
       } else if (available && biometryType === BiometryTypes.FaceID) {
-        setIconBiometrics(ICONS.ic_faceId);
+        setIconBiometrics(icons.ic_faceId);
+        setDescribeBiometrics('Nhận diện khuôn mặt của người dùng');
         setIsSupportedBiometrics(TYPE_SUPPORT_BIOMETRIC.FaceID);
       } else if (available && biometryType === BiometryTypes.Biometrics) {
-        setIconBiometrics(ICONS.ic_fingerprint);
+        setIconBiometrics(icons.ic_fingerprint);
+        setDescribeBiometrics('Dùng cảm biến vân tay của người dùng');
         setIsSupportedBiometrics(TYPE_SUPPORT_BIOMETRIC.Biometrics);
       } else {
         setIsShowBiometrics(false);
         setIsSupportedBiometrics(TYPE_SUPPORT_BIOMETRIC.UnSupport);
-        //CustomToast('Thiết bị của bạn không hỗ trợ biometrics');
       }
     });
-  }, []);
+  }, [rnBiometrics]);
 
   return {
     rnBiometrics,
     iconBiometrics,
     isShowBiometrics,
     isSupportedBiometrics,
+    describeBiometrics,
     TYPE_SUPPORT_BIOMETRIC,
   };
 }

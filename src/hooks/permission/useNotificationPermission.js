@@ -5,9 +5,7 @@ import messaging from '@react-native-firebase/messaging';
 
 export default function useNotificationPermission() {
   const [hasPermission, setHasPermission] = useState(false);
-  const [register, setRegister] = useState(
-    messaging().isDeviceRegisteredForRemoteMessages,
-  );
+  const [register, setRegister] = useState(messaging().isDeviceRegisteredForRemoteMessages);
 
   useEffect(() => {
     messaging()

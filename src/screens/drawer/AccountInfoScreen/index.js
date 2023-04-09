@@ -36,7 +36,6 @@ export default function AccountInfoScreen() {
       firstName: values?.firstName,
       dob: moment(values.birthday).format('MM/DD/YYYY'),
     };
-    console.log('🚀 ~ file: index.js:39 ~ onSubmit ~ body', body);
     dispatch({ type: actions.UPDATE_ONE_USER, body });
   };
 

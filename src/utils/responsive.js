@@ -10,8 +10,7 @@ export const statusBarHeight = StatusBar.currentHeight;
 
 export const { width, height } = Dimensions.get('screen');
 
-export const [shortDimension, longDimension] =
-  width < height ? [width, height] : [height, width];
+export const [shortDimension, longDimension] = width < height ? [width, height] : [height, width];
 
 /**
  * H => Horizontal
@@ -27,11 +26,9 @@ export const [shortDimension, longDimension] =
  * moderateVScale responsive by height screen with factor
  *
  **/
-export const hScale = size =>
-  typeof size === 'number' ? (shortDimension / width) * size : size;
+export const hScale = size => (typeof size === 'number' ? (shortDimension / width) * size : size);
 
-export const vScale = size =>
-  typeof size === 'number' ? (longDimension / height) * size : size;
+export const vScale = size => (typeof size === 'number' ? (longDimension / height) * size : size);
 
 export const moderateHScale = (size, factor = 0.5) => {
   return size + (hScale(size) - size) * factor;

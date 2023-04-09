@@ -17,7 +17,6 @@ import { useSelector } from 'react-redux';
 export default function HomeScreen() {
   const dispatch = useDispatch();
   const infoUser = useSelector(state => state.getOneUser?.data);
-  console.log('🚀 ~ file: index.js:20 ~ HomeScreen ~ infoUser', infoUser);
   useEffect(() => {
     dispatch({ type: actions.GET_ONE_USER });
   }, [dispatch]);

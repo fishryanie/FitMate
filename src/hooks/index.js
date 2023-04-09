@@ -1,18 +1,22 @@
 /** @format */
 
-import useCurrentPosition from './common/useCurrentPosition';
+import useMomo from './common/useMomo';
+import useBiometrics from './common/useBiometrics';
 import useLayoutSize from './common/useLayoutSize';
 import usePrevious from './common/usePrevious';
 import useDeviceName from './deviceInfo/useDeviceName';
-import useFCMMessage from './firebase/useFCMMessage';
-import useNotificationMessage from './firebase/useNotificationMessage';
+import useCurrentPosition from './common/useCurrentPosition';
+
 import useFCMToken from './firebase/useFCMToken';
+import useFCMMessage from './firebase/useFCMMessage';
+import useBackgroundMessages from './firebase/useBackgroundMessages';
+import useNotificationListener from './firebase/useNotificationListener';
+
 import useCameraPermission from './permission/useCameraPermission';
 import useLocationPermission from './permission/useLocationPermission';
 import usePhotoPermission from './permission/usePhotoPermission';
 import useNotificationPermission from './permission/useNotificationPermission';
-import useMomo from './common/useMomo';
-import useBiometrics from './common/useBiometrics';
+
 export {
   usePrevious,
   useLayoutSize,
@@ -21,7 +25,8 @@ export {
   //firebase
   useFCMToken,
   useFCMMessage,
-  useNotificationMessage,
+  useBackgroundMessages,
+  useNotificationListener,
   //permission
   useCameraPermission,
   useLocationPermission,

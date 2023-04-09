@@ -1,5 +1,5 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-  package="com.iflex">
+  package="com.personal.fitmate">
 
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
@@ -23,6 +23,21 @@
       android:allowBackup="false"
       android:theme="@style/AppTheme"
       android:usesCleartextTraffic="true">
+      <meta-data
+        android:name="com.supersami.foregroundservice.notification_channel_name"
+        android:value="Location" />
+      <meta-data
+        android:name="com.supersami.foregroundservice.notification_color"
+        android:resource="@color/blue_foreground" />
+      <service android:name="com.supersami.foregroundservice.ForegroundService" android:foregroundServiceType="location"></service>
+      <service android:name="com.supersami.foregroundservice.ForegroundServiceTask" android:foregroundServiceType="location"></service>
+      <meta-data
+        android:name="com.google.firebase.messaging.default_notification_icon"
+        android:resource="@drawable/ic_notification" />
+      <meta-data
+        tools:replace="android:resource"
+        android:name="com.google.firebase.messaging.default_notification_color"
+        android:resource="@color/blue" />
       <activity
         android:name=".MainActivity"
         android:exported="true"

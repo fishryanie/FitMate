@@ -1,8 +1,8 @@
 /** @format */
 
-import router from '@navigation/router';
 import dynamicLinks from '@react-native-firebase/dynamic-links';
 import { authRoot } from '@routes/Ref';
+import router from '@routes/router';
 import actions from '@store/actions';
 import queryString from 'query-string';
 import { useEffect, useState } from 'react';

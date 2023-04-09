@@ -7,6 +7,7 @@ const initialState = {
   data: null,
   password: '',
   username: '',
+  displayName: '',
   accessToken: null,
   refreshToken: null,
   isLoading: false,
@@ -82,6 +83,7 @@ export const user = (state = initialState, action) => {
         ...state,
         username: action.username,
         password: action.password,
+        displayName: action.displayName,
       };
     case actions.LOGOUT_APP:
       return { ...state, accessToken: null, refreshToken: null };

@@ -1,15 +1,6 @@
 /** @format */
 
-import {
-  Block,
-  HeaderTitle,
-  Icon,
-  Image,
-  LiveMarker,
-  Modal,
-  Pressable,
-  Text,
-} from '@components';
+import { Block, HeaderTitle, Icon, Image, LiveMarker, Modal, Pressable, Text } from '@components';
 import { StatusBar } from 'react-native';
 import { COLORS } from '@theme';
 import { height, width } from '@utils/responsive';
@@ -29,12 +20,6 @@ const PIN_HEIGHT = 30;
 export const ModalSelectLocation = ({ current, setModal, setCurrent }) => {
   const dispatch = useDispatch();
   const { top, bottom } = useSafeAreaInsets();
-  console.log(
-    '🚀 ~ file: ModalSelectLocation.js:31 ~ ModalSelectLocation ~ bottom',
-    bottom,
-  );
-  console.log('🚀 ~ file: ModalSelectLocation.js:31 ~ ModalSelectLocation ~ top', top);
-  console.log('height', height);
   const [isAnimating, setIsAnimating] = useState(false);
   const [region, setRegion] = useState(current);
   const mapViewRef = useRef(null);
@@ -64,10 +49,6 @@ export const ModalSelectLocation = ({ current, setModal, setCurrent }) => {
   };
 
   const onRegionChangeComplete = (_region, _) => {
-    console.log(
-      '🚀 ~ file: ModalSelectLocation.js:60 ~ onRegionChangeComplete ~ _region',
-      _region,
-    );
     setRegion(_region);
     setIsAnimating(false);
   };
@@ -81,34 +62,14 @@ export const ModalSelectLocation = ({ current, setModal, setCurrent }) => {
 
   const _renderButtons = () => {
     return (
-      <Block
-        rowCenter
-        marginBottom={bottom ? bottom : 20}
-        spaceBetween
-        paddingHorizontal={15}>
-        <Block
-          width={width / 1.3}
-          height={50}
-          backgroundColor={COLORS.white}
-          radius={10}
-          rowCenter>
+      <Block rowCenter marginBottom={bottom ? bottom : 20} spaceBetween paddingHorizontal={15}>
+        <Block width={width / 1.3} height={50} backgroundColor={COLORS.white} radius={10} rowCenter>
           <Text fontSize={15} paddingHorizontal={10} numberOfLines={2}>
             {/* {geocoding?.data?.formatted_address} */}
           </Text>
         </Block>
-        <Pressable
-          round={40}
-          shadow1
-          backgroundColor="white"
-          alignCenter
-          justifyCenter
-          onPress={focusToMyCoord}>
-          <Icon
-            IconType={MaterialIcons}
-            iconName="my-location"
-            color="black"
-            iconSize={25}
-          />
+        <Pressable round={40} shadow1 backgroundColor="white" alignCenter justifyCenter onPress={focusToMyCoord}>
+          <Icon IconType={MaterialIcons} iconName="my-location" color="black" iconSize={25} />
         </Pressable>
       </Block>
     );
@@ -124,10 +85,6 @@ export const ModalSelectLocation = ({ current, setModal, setCurrent }) => {
       ios: height / 2 - height * 0.1,
     });
   }, []);
-  // console.log(
-  //   '🚀 ~ file: ModalSelectLocation.js:112 ~ StatusBar?.currentHeight',
-  //   StatusBar.currentHeight,
-  // );
 
   return (
     <Modal>

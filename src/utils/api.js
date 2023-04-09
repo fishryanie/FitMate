@@ -82,8 +82,6 @@ axios.interceptors.response.use(
 export default class HttpService {
   static generateHeader(headers) {
     const token = store.getState().user.accessToken;
-    console.log('🚀 ~ file: api.js:85 ~ HttpService ~ generateHeader ~ token', token);
-
     let options = {
       'Content-Type': headers || 'application/x-www-form-urlencoded',
       Accept: 'application/json',

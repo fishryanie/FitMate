@@ -10,21 +10,14 @@ import CommonContainer from './CommonContainer';
 import DrawerContainer from './DrawerContainer';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import { useBackgroundMessages, useFCMMessage, useNotificationPermission } from '@hooks';
 import { useSelector, useDispatch } from 'react-redux';
 import { navigationRef } from './Ref';
-import {
-  useFCMMessage,
-  useFCMToken,
-  useNotificationMessage,
-  useNotificationPermission,
-} from '@hooks';
-import { PopupAccept } from '@components';
 
 const Stack = createNativeStackNavigator();
 
 export default function MainContainer() {
-  useFCMToken();
-  useNotificationMessage();
+  useBackgroundMessages();
   useNotificationPermission();
   const dispatch = useDispatch();
   const message = useFCMMessage();

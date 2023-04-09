@@ -6,7 +6,7 @@ import { useSelector } from 'react-redux';
 export default function useFCMMessage() {
   const [message, setMessage] = useState(null);
 
-  const fcmMessage = useSelector(state => state.other.fcmMessage);
+  const fcmMessage = useSelector(state => state.app.fcmMessage);
 
   const isMount = useRef(true);
 

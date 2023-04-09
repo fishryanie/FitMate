@@ -59,7 +59,6 @@ export default function LocationFormScreen({ route }) {
 
   const [modal, setModal] = useState(false);
   const [modalNotifi, setModalNotifi] = useState(false);
-  console.log('🚀 ~ file: index.js:61 ~ AddLocationScreen ~ modalNotifi', modalNotifi);
   const [current, setCurrent] = useState(myCoord);
   const [isDefault, setIsDefault] = useState(false);
   const [heightDesc, setHeightDesc] = useState(120);

@@ -1,7 +1,6 @@
 /** @format */
 
 import { USER_ROLE } from '@constants';
-import router from '@navigation/router';
 import notifee, { EventType } from '@notifee/react-native';
 import messaging from '@react-native-firebase/messaging';
 import actions from '@store/actions';
@@ -11,6 +10,7 @@ import { useDispatch, useSelector } from 'react-redux';
 
 export default function useNotificationListener() {
   const accessToken = useSelector(state => state.user.accessToken);
+  const userRole = useSelector(state => state.user.userRole);
   const dispatch = useDispatch();
   const getDataMessage = fMessage => {};
   const onMessagePress = message => {};
